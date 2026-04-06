@@ -9,40 +9,22 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  background:#f5f4f0;
-  min-height:100vh;
-  padding:14px 12px;
-  color:#1a1a2e;
+  background:#f5f4f0;min-height:100vh;padding:14px 12px;color:#1a1a2e;
 }
 
-/* ─── PAGE WRAPPER + THREE-COLUMN GRID ───────────────────────── */
+/* ─── LAYOUT ──────────────────────────────────────────────────── */
 .page-wrap{max-width:1160px;margin:0 auto;}
-.main-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-}
+.main-grid{display:grid;grid-template-columns:1fr;gap:14px;}
 @media(min-width:860px){
-  .main-grid{
-    grid-template-columns:188px 1fr 188px;
-    align-items:start;
-    gap:14px;
-  }
+  .main-grid{grid-template-columns:188px 1fr 188px;align-items:start;gap:14px;}
 }
 
 /* ─── HEADER ──────────────────────────────────────────────────── */
 .header{
   background:linear-gradient(135deg,#3C3489 0%,#7F77DD 60%,#AFA9EC 100%);
-  border-radius:20px;
-  padding:16px 20px;
-  margin-bottom:14px;
-  color:white;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  box-shadow:0 6px 24px rgba(60,52,137,0.35);
-  position:relative;
-  overflow:hidden;
+  border-radius:20px;padding:16px 20px;margin-bottom:14px;color:white;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 6px 24px rgba(60,52,137,0.35);position:relative;overflow:hidden;
 }
 .header::before{content:'';position:absolute;top:-60px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,0.07);border-radius:50%;pointer-events:none;}
 .header::after{content:'';position:absolute;bottom:-80px;right:80px;width:150px;height:150px;background:rgba(255,255,255,0.05);border-radius:50%;pointer-events:none;}
@@ -50,6 +32,7 @@ body{
 .player-info{flex:1;min-width:0;}
 .player-name{font-size:19px;font-weight:900;letter-spacing:-0.5px;}
 .level-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.18);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;margin:5px 0 5px;border:1px solid rgba(255,255,255,0.28);}
+.level-badge.milestone-badge{background:rgba(255,215,0,0.3);border-color:rgba(255,215,0,0.6);}
 .xp-bar-label{font-size:10px;opacity:0.85;margin-bottom:4px;}
 .xp-bar-track{background:rgba(0,0,0,0.22);border-radius:10px;height:11px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);}
 .xp-bar-fill{height:100%;background:linear-gradient(90deg,#FFD700,#FFA500);border-radius:10px;transition:width 0.6s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(255,200,0,0.6);min-width:2px;}
@@ -58,101 +41,28 @@ body{
 .total-xp-sub{font-size:10px;opacity:0.8;margin-top:1px;font-weight:600;letter-spacing:0.3px;}
 
 /* ─── POKEMON PANELS ─────────────────────────────────────────── */
-.poke-panel{
-  display:flex;flex-direction:column;gap:10px;
-}
-@media(max-width:859px){
-  .poke-panel{display:none;} /* hidden on narrow screens; quest board is priority */
-}
-.poke-panel-label{
-  text-align:center;font-size:10px;font-weight:800;
-  text-transform:uppercase;letter-spacing:0.6px;color:#7F77DD;
-  margin-bottom:2px;
-}
-
-/* POKEMON CARD */
-.poke-card{
-  border-radius:16px;
-  background:white;
-  border:3px solid var(--type-color, #AFA9EC);
-  box-shadow:0 4px 16px color-mix(in srgb, var(--type-color, #AFA9EC) 30%, transparent);
-  overflow:hidden;
-  position:relative;
-  transition:transform 0.2s, box-shadow 0.2s;
-  cursor:default;
-}
-.poke-card-top{
-  padding:8px 8px 0;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.poke-lvl-tag{
-  background:var(--type-color, #AFA9EC);
-  color:white;border-radius:20px;
-  padding:2px 8px;font-size:10px;font-weight:800;
-  display:inline-flex;align-items:center;gap:3px;
-}
-.poke-type-tag{
-  font-size:9px;font-weight:700;color:#a0aec0;
-  background:#f5f4f0;border-radius:8px;padding:2px 7px;
-}
-.poke-img-area{
-  padding:6px 12px 4px;
-  display:flex;justify-content:center;
-  min-height:130px;align-items:center;
-  position:relative;
-}
-.poke-img{
-  width:110px;height:110px;
-  object-fit:contain;
-  display:block;
-  transition:filter 0.4s, opacity 0.4s;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.12));
-}
-.poke-img.silhouette{
-  filter:brightness(0) drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-  opacity:0.85;
-}
-.poke-card-bottom{
-  padding:6px 10px 10px;
-  text-align:center;
-  background:linear-gradient(to bottom, transparent, color-mix(in srgb, var(--type-color,#EEEDFE) 12%, white));
-}
+.poke-panel{display:flex;flex-direction:column;gap:10px;}
+@media(max-width:859px){.poke-panel{display:none;}}
+.poke-panel-label{text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:#7F77DD;margin-bottom:2px;}
+.poke-card{border-radius:16px;background:white;border:3px solid var(--type-color,#AFA9EC);box-shadow:0 4px 16px color-mix(in srgb,var(--type-color,#AFA9EC) 25%,transparent);overflow:hidden;position:relative;transition:transform 0.2s,box-shadow 0.2s;}
+.poke-card-top{padding:8px 8px 0;display:flex;justify-content:space-between;align-items:center;}
+.poke-lvl-tag{background:var(--type-color,#AFA9EC);color:white;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;}
+.poke-type-tag{font-size:9px;font-weight:700;color:#a0aec0;background:#f5f4f0;border-radius:8px;padding:2px 7px;}
+.poke-img-area{padding:6px 12px 4px;display:flex;justify-content:center;min-height:130px;align-items:center;position:relative;}
+.poke-img{width:110px;height:110px;object-fit:contain;display:block;transition:filter 0.4s,opacity 0.4s;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.12));}
+.poke-img.silhouette{filter:brightness(0) drop-shadow(0 2px 6px rgba(0,0,0,0.3));opacity:0.85;}
+.poke-card-bottom{padding:6px 10px 10px;text-align:center;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--type-color,#EEEDFE) 12%,white));}
 .poke-name-text{font-size:14px;font-weight:900;color:#1a1a2e;}
 .poke-name-text.mystery{color:#a0aec0;letter-spacing:2px;}
-.poke-unlock-info{
-  font-size:10px;color:#7F77DD;font-weight:700;margin-top:3px;
-}
-.poke-mini-bar-track{
-  height:5px;background:#EEEDFE;border-radius:10px;
-  margin-top:5px;overflow:hidden;
-}
-.poke-mini-bar-fill{
-  height:100%;border-radius:10px;
-  background:linear-gradient(90deg,var(--type-color,#7F77DD),color-mix(in srgb, var(--type-color,#7F77DD) 70%, white));
-  transition:width 0.5s;
-}
-/* Unlocked card subtle shimmer */
-.poke-card.unlocked::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%);
-  background-size:200%;
-  background-position:200%;
-  border-radius:13px;pointer-events:none;
-}
-.poke-card.unlocked:hover::after{
-  animation:shimmer 0.8s ease forwards;
-}
-@keyframes shimmer{
-  from{background-position:200%;}
-  to{background-position:-200%;}
-}
-/* Max level badge */
-.poke-maxlvl{
-  text-align:center;padding:12px 8px;
-  font-size:12px;color:#3C3489;font-weight:700;
-  background:linear-gradient(135deg,#EEEDFE,#f5f4f0);
-  border-radius:12px;border:2px solid #AFA9EC;
-}
+.poke-unlock-info{font-size:10px;color:#7F77DD;font-weight:700;margin-top:3px;}
+.poke-mini-bar-track{height:5px;background:#EEEDFE;border-radius:10px;margin-top:5px;overflow:hidden;}
+.poke-mini-bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--type-color,#7F77DD),color-mix(in srgb,var(--type-color,#7F77DD) 70%,white));transition:width 0.5s;}
+.poke-card.unlocked::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.35) 50%,transparent 60%);background-size:200%;background-position:200%;border-radius:13px;pointer-events:none;}
+.poke-card.unlocked:hover::after{animation:shimmer 0.8s ease forwards;}
+@keyframes shimmer{from{background-position:200%;}to{background-position:-200%;}}
+.poke-maxlvl{text-align:center;padding:12px 8px;font-size:12px;color:#3C3489;font-weight:700;background:linear-gradient(135deg,#EEEDFE,#f5f4f0);border-radius:12px;border:2px solid #AFA9EC;}
+/* Milestone pokemon card glow */
+.poke-card.milestone-card{box-shadow:0 0 24px color-mix(in srgb,var(--type-color,#FFD700) 50%,transparent),0 4px 16px rgba(0,0,0,0.1);}
 
 /* ─── WEEK + DAY CARDS ────────────────────────────────────────── */
 .week-section{background:white;border-radius:16px;padding:12px 16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
@@ -188,14 +98,19 @@ body{
 .quest-item:hover:not(.locked){border-color:#AFA9EC;background:#EEEDFE;}
 .quest-item.checked{background:linear-gradient(135deg,#f0fff4,#e8f5e9);border-color:#68d391;}
 .quest-item.locked{cursor:default;}
+.quest-item.bonus-row{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#F6D860;cursor:default;}
 .quest-check{width:25px;height:25px;border-radius:8px;border:2.5px solid #AFA9EC;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;transition:all 0.2s;margin-top:1px;}
 .quest-item.checked .quest-check{background:#38a169;border-color:#38a169;color:white;font-weight:900;}
+.quest-item.bonus-row .quest-check{background:#F6D860;border-color:#D97706;font-size:14px;}
 .quest-body{flex:1;min-width:0;}
 .quest-time{font-size:9px;font-weight:800;color:#7F77DD;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+.quest-item.bonus-row .quest-time{color:#D97706;}
 .quest-text{font-size:13px;line-height:1.45;color:#2d3748;font-weight:500;}
 .quest-item.checked .quest-text{color:#2f855a;}
+.quest-item.bonus-row .quest-text{color:#92400e;font-style:italic;}
 .quest-xp{font-size:12px;font-weight:800;color:#3C3489;background:#EEEDFE;border-radius:8px;padding:3px 8px;flex-shrink:0;align-self:center;white-space:nowrap;}
 .quest-item.checked .quest-xp{background:#c6f6d5;color:#276749;}
+.quest-item.bonus-row .quest-xp{background:#fef3c7;color:#D97706;}
 
 /* ─── DAY FOOTER ──────────────────────────────────────────────── */
 .day-footer{background:white;border-radius:16px;padding:12px 16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
@@ -214,10 +129,10 @@ body{
 .guide-btn{background:white;border:2px solid #AFA9EC;color:#7F77DD;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;}
 .guide-btn:hover{background:#EEEDFE;border-color:#7F77DD;}
 
-/* ─── MODALS (shared overlay) ─────────────────────────────────── */
+/* ─── MODAL OVERLAY ───────────────────────────────────────────── */
 .overlay{position:fixed;inset:0;background:rgba(10,10,30,0.7);backdrop-filter:blur(5px);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;}
 
-/* PIN */
+/* ─── PIN ─────────────────────────────────────────────────────── */
 .pin-card{background:white;border-radius:20px;padding:26px 22px;width:100%;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;}
 .pin-title{font-size:19px;font-weight:900;color:#3C3489;margin-bottom:3px;}
 .pin-sub{font-size:12px;color:#a0aec0;margin-bottom:18px;}
@@ -233,8 +148,8 @@ body{
 .pin-cancel{width:100%;background:none;border:2px solid #e2e8f0;border-radius:10px;padding:9px;font-size:12px;color:#a0aec0;cursor:pointer;transition:all 0.18s;}
 .pin-cancel:hover{border-color:#AFA9EC;color:#7F77DD;}
 
-/* GUIDE VIEW */
-.guide-card{background:white;border-radius:20px;width:100%;max-width:580px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+/* ─── GUIDE VIEW ──────────────────────────────────────────────── */
+.guide-card{background:white;border-radius:20px;width:100%;max-width:600px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
 .guide-header{background:linear-gradient(135deg,#3C3489,#7F77DD);color:white;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .guide-header-title{font-size:16px;font-weight:800;}
 .guide-close{background:rgba(255,255,255,0.2);border:none;color:white;border-radius:8px;padding:5px 11px;cursor:pointer;font-size:12px;font-weight:700;transition:background 0.15s;}
@@ -245,9 +160,9 @@ body{
 .guide-summary-stats{display:flex;gap:20px;flex-wrap:wrap;}
 .guide-stat-val{font-size:20px;font-weight:900;color:#3C3489;line-height:1;}
 .guide-stat-sub{font-size:10px;color:#a0aec0;}
-.guide-week-block{margin-bottom:20px;}
+.guide-week-block{margin-bottom:22px;}
 .guide-week-label{font-size:11px;font-weight:800;color:#3C3489;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:7px;padding-bottom:5px;border-bottom:2px solid #EEEDFE;}
-.guide-day-row{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;background:#f9f9ff;margin-bottom:5px;border:2px solid #EEEDFE;flex-wrap:wrap;}
+.guide-day-row{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:10px;background:#f9f9ff;margin-bottom:4px;border:2px solid #EEEDFE;flex-wrap:wrap;}
 .guide-day-name{font-weight:800;font-size:12px;color:#3C3489;width:34px;flex-shrink:0;}
 .guide-day-quests{font-size:11px;color:#a0aec0;flex:1;min-width:50px;}
 .guide-day-xp{font-size:12px;font-weight:800;color:#7F77DD;white-space:nowrap;}
@@ -255,106 +170,104 @@ body{
 .guide-signoff-btn:hover{transform:scale(1.04);}
 .guide-signed{background:#c6f6d5;color:#276749;border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;flex-shrink:0;}
 .guide-not-sub{background:#f7fafc;color:#a0aec0;border-radius:8px;padding:4px 10px;font-size:10px;font-weight:600;flex-shrink:0;}
+/* Bonus XP in guide */
+.guide-bonus-btn{background:#fffbeb;border:2px solid #F6D860;color:#D97706;border-radius:8px;padding:4px 10px;font-size:10px;font-weight:800;cursor:pointer;transition:all 0.18s;flex-shrink:0;}
+.guide-bonus-btn:hover{background:#fef3c7;border-color:#D97706;}
+.guide-bonus-badge{background:#fef3c7;color:#D97706;border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;flex-shrink:0;cursor:pointer;border:2px solid #F6D860;}
+.guide-bonus-badge:hover{background:#fffbeb;}
+/* Bonus form panel */
+.bonus-form-panel{
+  background:linear-gradient(135deg,#fffbeb,#fef9e7);
+  border:2px solid #F6D860;border-radius:12px;
+  padding:12px 14px;margin-bottom:4px;
+}
+.bonus-form-title{font-size:12px;font-weight:800;color:#D97706;margin-bottom:10px;}
+.bonus-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.bonus-preset{
+  background:white;border:2px solid #F6D860;color:#D97706;
+  border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800;
+  cursor:pointer;transition:all 0.15s;
+}
+.bonus-preset:hover,.bonus-preset.selected{background:#F6D860;color:white;border-color:#D97706;}
+.bonus-inputs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.bonus-amt-input{
+  width:80px;border:2px solid #F6D860;border-radius:8px;
+  padding:6px 8px;font-size:13px;font-weight:700;color:#D97706;
+  background:white;outline:none;
+}
+.bonus-amt-input:focus{border-color:#D97706;}
+.bonus-note-input{
+  flex:1;min-width:140px;border:2px solid #e2e8f0;border-radius:8px;
+  padding:6px 8px;font-size:12px;color:#2d3748;background:white;outline:none;
+}
+.bonus-note-input:focus{border-color:#AFA9EC;}
+.bonus-form-btns{display:flex;gap:8px;}
+.bonus-award-btn{
+  background:linear-gradient(135deg,#F6D860,#D97706);color:white;
+  border:none;border-radius:8px;padding:7px 16px;font-size:12px;
+  font-weight:800;cursor:pointer;transition:all 0.18s;
+}
+.bonus-award-btn:hover{transform:scale(1.03);}
+.bonus-cancel-btn{
+  background:white;border:2px solid #e2e8f0;color:#a0aec0;
+  border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;
+}
+.bonus-cancel-btn:hover{border-color:#AFA9EC;color:#7F77DD;}
 
 /* ─── LEVEL-UP OVERLAY ────────────────────────────────────────── */
 .lvlup-overlay{
-  position:fixed;inset:0;
-  background:radial-gradient(ellipse at center, rgba(60,52,137,0.97) 0%, rgba(20,10,60,0.99) 100%);
-  z-index:200;
-  display:flex;align-items:center;justify-content:center;
-  padding:16px;overflow:hidden;
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden;
+  background:radial-gradient(ellipse at center,rgba(60,52,137,0.97) 0%,rgba(20,10,60,0.99) 100%);
+}
+.lvlup-overlay.milestone{
+  background:radial-gradient(ellipse at center,rgba(160,120,0,0.97) 0%,rgba(60,30,0,0.99) 100%);
 }
 .lvlup-stars{position:absolute;inset:0;pointer-events:none;z-index:0;}
-.star-particle{
-  position:absolute;font-size:18px;
-  animation:starFall linear forwards;
-  pointer-events:none;
-}
-@keyframes starFall{
-  0%{transform:translateY(-30px) rotate(0deg);opacity:1;}
-  80%{opacity:1;}
-  100%{transform:translateY(110vh) rotate(540deg);opacity:0;}
-}
-.lvlup-card{
-  background:white;border-radius:24px;
-  padding:28px 24px 24px;
-  width:100%;max-width:360px;
-  text-align:center;
-  box-shadow:0 20px 80px rgba(0,0,0,0.5);
-  position:relative;z-index:1;
-  animation:popIn 0.5s cubic-bezier(.4,0,.2,1);
-}
-.lvlup-title{font-size:26px;font-weight:900;color:#3C3489;letter-spacing:-0.5px;margin-bottom:2px;}
-.lvlup-subtitle{font-size:14px;color:#7F77DD;font-weight:700;margin-bottom:14px;}
-.lvlup-new-level{
-  display:inline-block;
-  background:linear-gradient(135deg,#7F77DD,#3C3489);
-  color:white;border-radius:20px;
-  padding:5px 16px;font-size:13px;font-weight:800;
-  margin-bottom:16px;
-}
-/* The revealed Pokemon card inside level-up overlay */
-.lvlup-poke-card{
-  border-radius:16px;
-  background:white;
-  border:4px solid var(--reveal-color,#FFD700);
-  box-shadow:0 0 32px color-mix(in srgb, var(--reveal-color,#FFD700) 50%, transparent);
-  padding:10px 10px 12px;
-  margin:0 auto 16px;
-  max-width:200px;
-  position:relative;overflow:hidden;
-}
-.lvlup-poke-card::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.5) 50%, transparent 65%);
-  background-size:200%;background-position:200%;
-  animation:shine 1.2s 0.3s ease forwards;
-  border-radius:12px;pointer-events:none;
-}
-@keyframes shine{
-  from{background-position:200%;}
-  to{background-position:-200%;}
-}
+.star-particle{position:absolute;animation:starFall linear forwards;pointer-events:none;}
+@keyframes starFall{0%{transform:translateY(-30px) rotate(0deg);opacity:1;}80%{opacity:1;}100%{transform:translateY(110vh) rotate(540deg);opacity:0;}}
+.lvlup-card{background:white;border-radius:24px;padding:24px 22px 20px;width:100%;max-width:360px;text-align:center;box-shadow:0 20px 80px rgba(0,0,0,0.5);position:relative;z-index:1;animation:popIn 0.5s cubic-bezier(.4,0,.2,1);}
+.lvlup-overlay.milestone .lvlup-card{border:3px solid #FFD700;box-shadow:0 20px 80px rgba(0,0,0,0.5),0 0 40px rgba(255,215,0,0.3);}
+.lvlup-title{font-size:24px;font-weight:900;color:#3C3489;letter-spacing:-0.5px;margin-bottom:2px;}
+.lvlup-overlay.milestone .lvlup-title{color:#D97706;}
+.lvlup-milestone-tag{display:none;background:linear-gradient(135deg,#FFD700,#D97706);color:white;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:0.5px;margin-bottom:10px;}
+.lvlup-overlay.milestone .lvlup-milestone-tag{display:inline-block;}
+.lvlup-subtitle{font-size:13px;color:#7F77DD;font-weight:700;margin-bottom:12px;}
+.lvlup-overlay.milestone .lvlup-subtitle{color:#D97706;}
+.lvlup-new-level{display:inline-block;background:linear-gradient(135deg,#7F77DD,#3C3489);color:white;border-radius:20px;padding:5px 16px;font-size:13px;font-weight:800;margin-bottom:14px;}
+.lvlup-overlay.milestone .lvlup-new-level{background:linear-gradient(135deg,#FFD700,#D97706);}
+.lvlup-poke-card{border-radius:16px;background:white;border:4px solid var(--reveal-color,#FFD700);box-shadow:0 0 32px color-mix(in srgb,var(--reveal-color,#FFD700) 50%,transparent);padding:10px 10px 12px;margin:0 auto 14px;max-width:200px;position:relative;overflow:hidden;}
+.lvlup-poke-card::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,0.5) 50%,transparent 65%);background-size:200%;background-position:200%;animation:shine 1.2s 0.3s ease forwards;border-radius:12px;pointer-events:none;}
+@keyframes shine{from{background-position:200%;}to{background-position:-200%;}}
 .lvlup-poke-img{width:120px;height:120px;object-fit:contain;display:block;margin:0 auto 8px;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.2));}
 .lvlup-poke-name{font-size:18px;font-weight:900;color:#1a1a2e;}
 .lvlup-poke-type{font-size:11px;color:#a0aec0;font-weight:700;margin-top:2px;}
 .lvlup-unlocked-tag{font-size:11px;font-weight:800;color:#276749;background:#c6f6d5;border-radius:20px;padding:3px 12px;display:inline-block;margin-bottom:14px;}
-.lvlup-continue-btn{
-  background:linear-gradient(135deg,#FFD700,#FFA500);
-  color:white;border:none;border-radius:14px;
-  padding:13px 28px;font-size:16px;font-weight:900;
-  cursor:pointer;width:100%;
-  box-shadow:0 4px 16px rgba(255,165,0,0.4);
-  transition:transform 0.2s;
-  text-shadow:0 1px 3px rgba(0,0,0,0.2);
-}
+.lvlup-overlay.milestone .lvlup-unlocked-tag{background:linear-gradient(135deg,#FFD700,#FFA500);color:white;}
+.lvlup-continue-btn{background:linear-gradient(135deg,#FFD700,#FFA500);color:white;border:none;border-radius:14px;padding:13px 28px;font-size:16px;font-weight:900;cursor:pointer;width:100%;box-shadow:0 4px 16px rgba(255,165,0,0.4);transition:transform 0.2s;text-shadow:0 1px 3px rgba(0,0,0,0.2);}
 .lvlup-continue-btn:hover{transform:translateY(-2px);}
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────── */
 @media(max-width:480px){
-  .player-name{font-size:16px;}
-  .total-xp-num{font-size:17px;}
-  .header{padding:12px 14px;}
+  .player-name{font-size:16px;}.total-xp-num{font-size:17px;}.header{padding:12px 14px;}
 }
 </style>
 </head>
 <body>
 <div class="page-wrap">
 
-<!-- ═══ HEADER (full width) ══════════════════════════════════ -->
+<!-- ═══ HEADER ══════════════════════════════════════════════ -->
 <div class="header">
   <div class="avatar">🎮</div>
   <div class="player-info">
     <div class="player-name">Lorenzo Di Rocco</div>
-    <div class="level-badge">
+    <div class="level-badge" id="levelBadge">
       <span id="levelIcon"></span>
       <span id="levelNum">Lv. 1</span>
       <span id="levelTitle">Rookie Adventurer</span>
     </div>
     <div class="xp-bar-label" id="xpBarLabel">0 / 200 XP to next level</div>
-    <div class="xp-bar-track">
-      <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
-    </div>
+    <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div></div>
   </div>
   <div class="total-xp-block">
     <div class="total-xp-num" id="totalXpNum">0</div>
@@ -365,7 +278,7 @@ body{
 <!-- ═══ THREE-COLUMN GRID ════════════════════════════════════ -->
 <div class="main-grid">
 
-  <!-- LEFT: Current Pokémon panel -->
+  <!-- LEFT: Current Pokémon -->
   <aside class="poke-panel" id="panelLeft">
     <div class="poke-panel-label">✨ Your Buddy</div>
     <div id="pokeCardCurrent"></div>
@@ -373,20 +286,14 @@ body{
 
   <!-- CENTER: Quest board -->
   <div class="main-content">
-
-    <!-- Week + day cards -->
     <div class="week-section">
       <div class="week-label" id="weekLabel">Week of …</div>
       <div class="day-cards" id="dayCards"></div>
     </div>
-
-    <!-- Perfect day banner -->
     <div class="perfect-banner" id="perfectBanner" style="display:none">
       <div class="perfect-title">⭐ PERFECT DAY! ⭐</div>
       <div class="perfect-sub">Every quest crushed! Full XP earned. Keep it going, Champion! 🏆</div>
     </div>
-
-    <!-- Quest section -->
     <div class="quest-section">
       <div class="quest-day-header">
         <div class="quest-day-icon" id="questDayIcon">📅</div>
@@ -397,33 +304,25 @@ body{
       </div>
       <div class="quest-list" id="questList"></div>
     </div>
-
-    <!-- Day footer -->
     <div class="day-footer">
       <div>
-        <div class="day-xp-nums">
-          <span id="dayXpNum">0</span>
-          <span>/ <span id="dayMaxXp">140</span> XP</span>
-        </div>
+        <div class="day-xp-nums"><span id="dayXpNum">0</span><span>/ <span id="dayMaxXp">140</span> XP</span></div>
         <div class="day-xp-sub">Today's Quest XP</div>
       </div>
       <div id="submitArea"></div>
     </div>
-
-    <!-- Guide button -->
     <div class="guide-bar">
       <button class="guide-btn" onclick="openPinModal()">🔒 Guide View</button>
     </div>
+  </div>
 
-  </div><!-- /main-content -->
-
-  <!-- RIGHT: Next Pokémon unlock panel -->
+  <!-- RIGHT: Next unlock -->
   <aside class="poke-panel" id="panelRight">
     <div class="poke-panel-label">🔒 Next Unlock</div>
     <div id="pokeCardNext"></div>
   </aside>
 
-</div><!-- /main-grid -->
+</div>
 </div><!-- /page-wrap -->
 
 <!-- ═══ PIN MODAL ════════════════════════════════════════════ -->
@@ -432,10 +331,8 @@ body{
     <div class="pin-title">🔒 Guide Access</div>
     <div class="pin-sub">Enter your 4-digit PIN</div>
     <div class="pin-dots">
-      <div class="pin-dot" id="pd0"></div>
-      <div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div>
-      <div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
     </div>
     <div class="pin-error" id="pinError"></div>
     <div class="pin-keypad">
@@ -471,268 +368,280 @@ body{
 <div class="lvlup-overlay" id="lvlupOverlay" style="display:none">
   <div class="lvlup-stars" id="lvlupStars"></div>
   <div class="lvlup-card">
-    <div class="lvlup-title">⬆️ LEVEL UP!</div>
-    <div class="lvlup-subtitle">You unlocked a new buddy!</div>
+    <div class="lvlup-title" id="lvlupTitle">⬆️ LEVEL UP!</div>
+    <div class="lvlup-milestone-tag">🏆 MILESTONE REACHED!</div>
+    <div class="lvlup-subtitle" id="lvlupSubtitle">You unlocked a new buddy!</div>
     <div class="lvlup-new-level" id="lvlupNewLevel">Lv. 2 — Bronze Explorer</div>
     <div class="lvlup-poke-card" id="lvlupPokeCard" style="--reveal-color:#F6D860">
-      <img class="lvlup-poke-img" id="lvlupPokeImg" src="" alt="" onerror="this.style.fontSize='64px';this.src='';this.alt='🎮'">
+      <img class="lvlup-poke-img" id="lvlupPokeImg" src="" alt="" onerror="this.style.fontSize='64px';this.alt='🎮'">
       <div class="lvlup-poke-name" id="lvlupPokeName">Charmander</div>
       <div class="lvlup-poke-type" id="lvlupPokeType">Fire</div>
     </div>
-    <div class="lvlup-unlocked-tag">🎉 NEW POKÉMON UNLOCKED!</div>
+    <div class="lvlup-unlocked-tag" id="lvlupUnlockedTag">🎉 NEW POKÉMON UNLOCKED!</div>
     <button class="lvlup-continue-btn" onclick="closeLevelUp()">LET'S GO! 🚀</button>
   </div>
 </div>
 
 <script>
 // ════════════════════════════════════════════════════════════
-//  CONSTANTS  ← edit these to customize the app
+//  CONSTANTS  ← edit these to customise the app
 // ════════════════════════════════════════════════════════════
 
 const GUIDE_PIN    = '1234';      // ← change PIN here
 const DB_KEY       = 'lorenzoDB2';
 const XP_PER_LEVEL = 200;
 
+// ─── 20 LEVELS ─────────────────────────────────────────────
+// Milestone levels: 10 (Mythic Legend) and 20 (Pokémon Master)
+// Add more entries to extend beyond 20 levels.
 const LEVEL_TITLES = [
-  'Rookie Adventurer',  // Lv 1
-  'Bronze Explorer',    // Lv 2
-  'Silver Warrior',     // Lv 3
-  'Gold Champion',      // Lv 4
-  'Legendary Hero',     // Lv 5
-  'Ultimate Pro',       // Lv 6
+  'Rookie Adventurer',   // 1
+  'Bronze Explorer',     // 2
+  'Silver Warrior',      // 3
+  'Gold Champion',       // 4
+  'Legendary Hero',      // 5
+  'Ultimate Pro',        // 6
+  'Quest Master',        // 7
+  'Star Crusher',        // 8
+  'Epic Ranger',         // 9
+  'Mythic Legend',       // 10 ★ MILESTONE
+  'Storm Breaker',       // 11
+  'Dragon Tamer',        // 12
+  'Shadow Knight',       // 13
+  'Thunder Lord',        // 14
+  'Blaze Champion',      // 15
+  'Crystal Guardian',    // 16
+  'Void Walker',         // 17
+  'Neon Phantom',        // 18
+  'Apex Predator',       // 19
+  'Pokémon Master',      // 20 ★★ MILESTONE
 ];
-const LEVEL_ICONS = ['⭐','🥉','🥈','🥇','🏆','💎'];
+const LEVEL_ICONS = [
+  '⭐','🥉','🥈','🥇','🏆','💎',
+  '🔮','⚡','🦅','🌟',          // 10 = MILESTONE
+  '🌊','🐉','🌑','🌩️','🔥',
+  '💠','🌀','✴️','🦁','👑',    // 20 = MILESTONE
+];
+// Levels that are milestones (extra special celebration)
+const MILESTONE_LEVELS = new Set([10, 20]);
 
 // ─── POKÉMON UNLOCK TABLE ──────────────────────────────────
-// Each entry is unlocked when Lorenzo reaches that level.
-// To change a Pokémon: update id (PokeAPI number), name, type, color.
+// milestone:true → triggers special golden overlay
+// To swap a Pokémon: change id (PokeAPI #) and name/type/color
 const POKEMON = [
-  { id:25,  name:'Pikachu',    type:'Electric',    color:'#F0C840', level:1 },
-  { id:4,   name:'Charmander', type:'Fire',        color:'#FF7741', level:2 },
-  { id:133, name:'Eevee',      type:'Normal',      color:'#C8A870', level:3 },
-  { id:94,  name:'Gengar',     type:'Ghost',       color:'#8040D8', level:4 },
-  { id:150, name:'Mewtwo',     type:'Psychic',     color:'#E060A0', level:5 },
-  { id:6,   name:'Charizard',  type:'Fire/Flying', color:'#FF5010', level:6 },
+  { id:25,  name:'Pikachu',    type:'Electric',    color:'#F0C840', level:1  },
+  { id:4,   name:'Charmander', type:'Fire',        color:'#FF7741', level:2  },
+  { id:133, name:'Eevee',      type:'Normal',      color:'#C8A870', level:3  },
+  { id:94,  name:'Gengar',     type:'Ghost',       color:'#8040D8', level:4  },
+  { id:150, name:'Mewtwo',     type:'Psychic',     color:'#E060A0', level:5  },
+  { id:6,   name:'Charizard',  type:'Fire/Flying', color:'#FF5010', level:6  },
+  { id:448, name:'Lucario',    type:'Steel/Fighting',color:'#4080C8',level:7 },
+  { id:445, name:'Garchomp',   type:'Dragon',      color:'#7040A0', level:8  },
+  { id:384, name:'Rayquaza',   type:'Dragon/Flying',color:'#408040',level:9  },
+  { id:151, name:'Mew',        type:'Psychic',     color:'#FFB0D0', level:10, milestone:true },
+  { id:9,   name:'Blastoise',  type:'Water',       color:'#4080FF', level:11 },
+  { id:248, name:'Tyranitar',  type:'Rock/Dark',   color:'#607040', level:12 },
+  { id:149, name:'Dragonite',  type:'Dragon/Flying',color:'#F0A840',level:13 },
+  { id:658, name:'Greninja',   type:'Water/Dark',  color:'#303870', level:14 },
+  { id:257, name:'Blaziken',   type:'Fire/Fighting',color:'#C04020',level:15 },
+  { id:282, name:'Gardevoir',  type:'Psychic/Fairy',color:'#B060D8',level:16 },
+  { id:359, name:'Absol',      type:'Dark',        color:'#7080C0', level:17 },
+  { id:700, name:'Sylveon',    type:'Fairy',       color:'#FF80A0', level:18 },
+  { id:445, name:'Kommo-o',    type:'Dragon/Fighting',color:'#80A050',level:19},
+  { id:493, name:'Arceus',     type:'Normal',      color:'#D4AF37', level:20, milestone:true },
 ];
 
 function pokeImg(id){
-  // JSDelivr CDN mirrors PokeAPI sprites — faster and more reliable on school networks
   return `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${id}.png`;
 }
-function currentPoke(xp){ return POKEMON[Math.min(levelNum(xp)-1, POKEMON.length-1)]; }
+function currentPoke(xp){ return POKEMON[Math.min(levelNum(xp)-1,POKEMON.length-1)]; }
 function nextPoke(xp){
-  const idx = levelNum(xp);
-  return idx < POKEMON.length ? POKEMON[idx] : null;
+  const idx=levelNum(xp);
+  return idx<POKEMON.length?POKEMON[idx]:null;
 }
 
 // ─── QUEST DATA ───────────────────────────────────────────
-const DAYS = ['Mon','Tue','Wed','Thu','Fri'];
-
-const DAY_META = {
-  Mon:{ theme:'Motivation Monday',   icon:'🚀' },
-  Tue:{ theme:'Keep Trying Tuesday', icon:'💪' },
-  Wed:{ theme:'Wonder Wednesday',    icon:'✨' },
-  Thu:{ theme:'Think Tank Thursday', icon:'🧠' },
-  Fri:{ theme:'Fitness Friday',      icon:'🏃' },
+const DAYS=['Mon','Tue','Wed','Thu','Fri'];
+const DAY_META={
+  Mon:{theme:'Motivation Monday',   icon:'🚀'},
+  Tue:{theme:'Keep Trying Tuesday', icon:'💪'},
+  Wed:{theme:'Wonder Wednesday',    icon:'✨'},
+  Thu:{theme:'Think Tank Thursday', icon:'🧠'},
+  Fri:{theme:'Fitness Friday',      icon:'🏃'},
 };
-
-// Mon–Thu  (max 140 XP)
-const Q_WEEKDAY = [
-  { time:'8:45 – 9:00',   xp:25, text:'I let others focus during Limitless Launch — I expressed myself without pulling the group off track.' },
-  { time:'9:00 – 11:25',  xp:20, text:'I stayed focused on Core Skills and hit 120 XP.' },
-  { time:'11:30 – 12:15', xp:20, text:'I kept Lunch + Recess fun for everyone — no moments that took it off the rails.' },
-  { time:'12:15 – 12:45', xp:25, text:'I worked on Check Chart time independently and stayed focused.' },
-  { time:'12:45 – 2:15',  xp:30, text:'I brought my energy to Workshop in a way that helped, not distracted.' },
-  { time:'2:55 – 3:30',   xp:20, text:'I finished the day strong — Clean Up, Closing, and Dismissal without disrupting the room.' },
+const Q_WEEKDAY=[
+  {time:'8:45 – 9:00',   xp:25, text:'I let others focus during Limitless Launch — I expressed myself without pulling the group off track.'},
+  {time:'9:00 – 11:25',  xp:20, text:'I stayed focused on Core Skills and hit 120 XP.'},
+  {time:'11:30 – 12:15', xp:20, text:'I kept Lunch + Recess fun for everyone — no moments that took it off the rails.'},
+  {time:'12:15 – 12:45', xp:25, text:'I worked on Check Chart time independently and stayed focused.'},
+  {time:'12:45 – 2:15',  xp:30, text:'I brought my energy to Workshop in a way that helped, not distracted.'},
+  {time:'2:55 – 3:30',   xp:20, text:'I finished the day strong — Clean Up, Closing, and Dismissal without disrupting the room.'},
 ];
-
-// Friday  (max 145 XP)
-const Q_FRIDAY = [
-  { time:'8:45 – 9:00',   xp:25, text:'I let others focus during Limitless Launch — I expressed myself without pulling the group off track.' },
-  { time:'9:00 – 11:25',  xp:20, text:'I stayed focused on Core Skills and hit 120 XP.' },
-  { time:'11:30 – 12:15', xp:20, text:'I kept Lunch + Recess fun for everyone — no moments that took it off the rails.' },
-  { time:'12:15 – 12:45', xp:25, text:'I worked on Check Chart time independently and stayed focused.' },
-  { time:'12:45 – 1:10',  xp:15, text:'I brought full energy to Townhall and represented my class well.' },
-  { time:'1:15 – 3:10',   xp:20, text:'I powered through Follow Through Fridays + Community Contribution with focus.' },
-  { time:'3:10 – 3:30',   xp:20, text:'I finished the day strong — Clean Up, Closing, and Dismissal without disrupting the room.' },
+const Q_FRIDAY=[
+  {time:'8:45 – 9:00',   xp:25, text:'I let others focus during Limitless Launch — I expressed myself without pulling the group off track.'},
+  {time:'9:00 – 11:25',  xp:20, text:'I stayed focused on Core Skills and hit 120 XP.'},
+  {time:'11:30 – 12:15', xp:20, text:'I kept Lunch + Recess fun for everyone — no moments that took it off the rails.'},
+  {time:'12:15 – 12:45', xp:25, text:'I worked on Check Chart time independently and stayed focused.'},
+  {time:'12:45 – 1:10',  xp:15, text:'I brought full energy to Townhall and represented my class well.'},
+  {time:'1:15 – 3:10',   xp:20, text:'I powered through Follow Through Fridays + Community Contribution with focus.'},
+  {time:'3:10 – 3:30',   xp:20, text:'I finished the day strong — Clean Up, Closing, and Dismissal without disrupting the room.'},
 ];
-
-function questsFor(day){ return day==='Fri' ? Q_FRIDAY : Q_WEEKDAY; }
-function maxXpFor(day){ return questsFor(day).reduce((s,q)=>s+q.xp,0); }
+function questsFor(day){return day==='Fri'?Q_FRIDAY:Q_WEEKDAY;}
+function maxXpFor(day){return questsFor(day).reduce((s,q)=>s+q.xp,0);}
 
 // ════════════════════════════════════════════════════════════
 //  STATE
 // ════════════════════════════════════════════════════════════
-let db          = { weeks:{}, allTimeXP:0, pendingLevelUp:0 };
+let db          = {weeks:{},allTimeXP:0,pendingLevelUp:0};
 let weekKey     = '';
 let activeDay   = 'Mon';
 let pinBuf      = '';
 let confirmStep = false;
+let activeBonusKey = null;  // 'weekKey|day' when bonus form is open
 
 // ════════════════════════════════════════════════════════════
 //  DATABASE
 // ════════════════════════════════════════════════════════════
 function loadDB(){
-  try{ const s=localStorage.getItem(DB_KEY); if(s) db=JSON.parse(s); }
-  catch(e){ db={weeks:{},allTimeXP:0,pendingLevelUp:0}; }
-  if(!db.pendingLevelUp) db.pendingLevelUp=0;
+  try{const s=localStorage.getItem(DB_KEY);if(s)db=JSON.parse(s);}
+  catch(e){db={weeks:{},allTimeXP:0,pendingLevelUp:0};}
+  if(!db.pendingLevelUp)db.pendingLevelUp=0;
 }
-function saveDB(){ localStorage.setItem(DB_KEY,JSON.stringify(db)); }
+function saveDB(){localStorage.setItem(DB_KEY,JSON.stringify(db));}
 
 function getMonday(date){
-  const d=new Date(date);
-  const dow=d.getDay();
-  let off;
-  if(dow===0) off=1; else if(dow===6) off=-5; else off=-(dow-1);
+  const d=new Date(date); const dow=d.getDay();
+  let off; if(dow===0)off=1; else if(dow===6)off=-5; else off=-(dow-1);
   d.setDate(d.getDate()+off);
   const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');
   return `${y}-${m}-${dd}`;
 }
-
-function todayDayName(){ return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()]; }
-function isWeekend(){ const d=new Date().getDay(); return d===0||d===6; }
-
+function todayDayName(){return['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];}
+function isWeekend(){const d=new Date().getDay();return d===0||d===6;}
 function weekRange(mondayKey){
   const mon=new Date(mondayKey+'T12:00:00');
-  const fri=new Date(mon); fri.setDate(fri.getDate()+4);
+  const fri=new Date(mon);fri.setDate(fri.getDate()+4);
   const f=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
   return `${f(mon)} – ${f(fri)}`;
 }
-
 function dayDateStr(day){
   const idx=DAYS.indexOf(day);
   const mon=new Date(weekKey+'T12:00:00');
-  const d=new Date(mon); d.setDate(mon.getDate()+idx);
+  const d=new Date(mon);d.setDate(mon.getDate()+idx);
   return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
 }
-
 function initWeek(wk){
   if(!db.weeks[wk]){
     db.weeks[wk]={days:{}};
     DAYS.forEach(day=>{
       db.weeks[wk].days[day]={
         quests:new Array(questsFor(day).length).fill(false),
-        submitted:false, signedOff:false
+        submitted:false,signedOff:false,
+        bonusXP:0,bonusNote:''   // ← Guide bonus XP
       };
     });
     saveDB();
+  } else {
+    // Migrate older entries that lack bonusXP
+    DAYS.forEach(day=>{
+      const d=db.weeks[wk].days[day];
+      if(d&&d.bonusXP===undefined){d.bonusXP=0;d.bonusNote='';}
+    });
   }
 }
-
-function dayData(wk,day){ return db.weeks[wk]?.days[day]; }
-
-function dayXP(wk,day){
-  const d=dayData(wk,day); if(!d) return 0;
+function dayData(wk,day){return db.weeks[wk]?.days[day];}
+function questXP(wk,day){
+  const d=dayData(wk,day);if(!d)return 0;
   return questsFor(day).reduce((s,q,i)=>d.quests[i]?s+q.xp:s,0);
 }
-
+function dayXP(wk,day){
+  return questXP(wk,day)+(dayData(wk,day)?.bonusXP||0);
+}
 function recomputeAllTimeXP(){
   let t=0;
-  for(const wk in db.weeks) DAYS.forEach(day=>{ t+=dayXP(wk,day); });
+  for(const wk in db.weeks)DAYS.forEach(day=>{t+=dayXP(wk,day);});
   return t;
 }
 
 // ════════════════════════════════════════════════════════════
 //  LEVEL HELPERS
 // ════════════════════════════════════════════════════════════
-function levelNum(xp){ return Math.min(Math.floor(xp/XP_PER_LEVEL)+1,LEVEL_TITLES.length); }
-function levelTitle(xp){ return LEVEL_TITLES[Math.min(Math.floor(xp/XP_PER_LEVEL),LEVEL_TITLES.length-1)]; }
-function levelIcon(xp){ return LEVEL_ICONS[Math.min(Math.floor(xp/XP_PER_LEVEL),LEVEL_ICONS.length-1)]; }
+function levelNum(xp){return Math.min(Math.floor(xp/XP_PER_LEVEL)+1,LEVEL_TITLES.length);}
+function levelTitle(xp){return LEVEL_TITLES[Math.min(Math.floor(xp/XP_PER_LEVEL),LEVEL_TITLES.length-1)];}
+function levelIcon(xp){return LEVEL_ICONS[Math.min(Math.floor(xp/XP_PER_LEVEL),LEVEL_ICONS.length-1)];}
 
-// Update XP and check for level-up event
 function updateXP(){
-  const oldLvl = levelNum(db.allTimeXP);
-  db.allTimeXP = recomputeAllTimeXP();
-  const newLvl = levelNum(db.allTimeXP);
-  if(newLvl > oldLvl){
-    db.pendingLevelUp = newLvl;
-    saveDB();
-    setTimeout(()=>showLevelUpOverlay(newLvl), 700);
-  } else {
-    saveDB();
-  }
+  const oldLvl=levelNum(db.allTimeXP);
+  db.allTimeXP=recomputeAllTimeXP();
+  const newLvl=levelNum(db.allTimeXP);
+  if(newLvl>oldLvl){db.pendingLevelUp=newLvl;saveDB();setTimeout(()=>showLevelUpOverlay(newLvl),700);}
+  else saveDB();
 }
 
 // ════════════════════════════════════════════════════════════
 //  RENDER
 // ════════════════════════════════════════════════════════════
 function renderHeader(){
-  const xp=db.allTimeXP;
-  const lvl=levelNum(xp);
-  const xpIn=xp%XP_PER_LEVEL;
-  const pct=Math.min((xpIn/XP_PER_LEVEL)*100,100);
+  const xp=db.allTimeXP,lvl=levelNum(xp);
+  const xpIn=xp%XP_PER_LEVEL,pct=Math.min((xpIn/XP_PER_LEVEL)*100,100);
+  const isMilestone=MILESTONE_LEVELS.has(lvl);
   document.getElementById('levelIcon').textContent=levelIcon(xp)+' ';
   document.getElementById('levelNum').textContent=`Lv. ${lvl}`;
   document.getElementById('levelTitle').textContent=levelTitle(xp);
   document.getElementById('totalXpNum').textContent=xp.toLocaleString();
   document.getElementById('xpBarLabel').textContent=`${xpIn} / ${XP_PER_LEVEL} XP to next level`;
   document.getElementById('xpBarFill').style.width=pct+'%';
+  document.getElementById('levelBadge').className='level-badge'+(isMilestone?' milestone-badge':'');
 }
 
 function renderPokePanels(){
-  const xp  = db.allTimeXP;
-  const cur  = currentPoke(xp);
-  const nxt  = nextPoke(xp);
-  const xpIn = xp % XP_PER_LEVEL;
-  const pct  = Math.min((xpIn/XP_PER_LEVEL)*100,100);
-
-  // LEFT: Current buddy
-  document.getElementById('pokeCardCurrent').innerHTML = buildPokeCard(cur, true, 0);
-
-  // RIGHT: Next unlock (or max level message)
+  const xp=db.allTimeXP;
+  const cur=currentPoke(xp),nxt=nextPoke(xp);
+  const xpIn=xp%XP_PER_LEVEL,pct=Math.min((xpIn/XP_PER_LEVEL)*100,100);
+  document.getElementById('pokeCardCurrent').innerHTML=buildPokeCard(cur,true,0);
   if(nxt){
-    document.getElementById('pokeCardNext').innerHTML = buildPokeCard(nxt, false, pct);
+    document.getElementById('pokeCardNext').innerHTML=buildPokeCard(nxt,false,pct);
   } else {
-    document.getElementById('pokeCardNext').innerHTML = `
-      <div class="poke-maxlvl">
-        💎 MAX LEVEL!<br>
-        <span style="font-size:11px;font-weight:600;color:#7F77DD;display:block;margin-top:4px">All Pokémon unlocked!</span>
-      </div>`;
+    document.getElementById('pokeCardNext').innerHTML=`<div class="poke-maxlvl">👑 POKÉMON MASTER!<br><span style="font-size:11px;font-weight:600;color:#D97706;display:block;margin-top:4px">All Pokémon unlocked!</span></div>`;
   }
 }
 
-function buildPokeCard(poke, unlocked, progressPct){
-  const img = pokeImg(poke.id);
+function buildPokeCard(poke,unlocked,progressPct){
+  const img=pokeImg(poke.id);
+  const errFn=`this.style.display='none';this.parentElement.innerHTML+='<div style=\\'font-size:52px;line-height:1\\'>🎮</div>'`;
+  const isMilestone=poke.milestone||false;
   if(unlocked){
-    return `
-      <div class="poke-card unlocked" style="--type-color:${poke.color}">
-        <div class="poke-card-top">
-          <span class="poke-lvl-tag">${LEVEL_ICONS[poke.level-1]} Lv.${poke.level}</span>
-          <span class="poke-type-tag">${poke.type}</span>
-        </div>
-        <div class="poke-img-area">
-          <img class="poke-img" src="${img}" alt="${poke.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:52px;line-height:1\'>🎮</div>'">
-        </div>
-        <div class="poke-card-bottom">
-          <div class="poke-name-text">${poke.name}</div>
-          <div class="poke-unlock-info">Your buddy! 🎉</div>
-        </div>
-      </div>`;
+    return `<div class="poke-card unlocked${isMilestone?' milestone-card':''}" style="--type-color:${poke.color}">
+      <div class="poke-card-top">
+        <span class="poke-lvl-tag">${LEVEL_ICONS[poke.level-1]} Lv.${poke.level}</span>
+        <span class="poke-type-tag">${poke.type}</span>
+      </div>
+      <div class="poke-img-area"><img class="poke-img" src="${img}" alt="${poke.name}" loading="lazy" onerror="${errFn}"></div>
+      <div class="poke-card-bottom">
+        <div class="poke-name-text">${poke.name}</div>
+        <div class="poke-unlock-info">${isMilestone?'🏆 Milestone buddy!':'Your buddy! 🎉'}</div>
+      </div></div>`;
   } else {
-    const xpNeeded = XP_PER_LEVEL - (db.allTimeXP % XP_PER_LEVEL);
-    return `
-      <div class="poke-card" style="--type-color:${poke.color}">
-        <div class="poke-card-top">
-          <span class="poke-lvl-tag" style="background:#a0aec0">🔒 Lv.${poke.level}</span>
-          <span class="poke-type-tag">???</span>
+    const xpNeeded=XP_PER_LEVEL-(db.allTimeXP%XP_PER_LEVEL);
+    const lockIcon=isMilestone?'🏆':'🔒';
+    return `<div class="poke-card" style="--type-color:${poke.color}">
+      <div class="poke-card-top">
+        <span class="poke-lvl-tag" style="background:#a0aec0">${lockIcon} Lv.${poke.level}</span>
+        <span class="poke-type-tag">???</span>
+      </div>
+      <div class="poke-img-area"><img class="poke-img silhouette" src="${img}" alt="???" loading="lazy" onerror="${errFn}"></div>
+      <div class="poke-card-bottom">
+        <div class="poke-name-text mystery">? ? ?</div>
+        <div class="poke-unlock-info">${isMilestone?'🏆 MILESTONE — ':'🔒 '}${xpNeeded} XP to unlock</div>
+        <div class="poke-mini-bar-track" style="--type-color:${poke.color}">
+          <div class="poke-mini-bar-fill" style="width:${progressPct}%"></div>
         </div>
-        <div class="poke-img-area">
-          <img class="poke-img silhouette" src="${img}" alt="???" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:52px;line-height:1;filter:brightness(0)\'>🎮</div>'">
-        </div>
-        <div class="poke-card-bottom">
-          <div class="poke-name-text mystery">? ? ?</div>
-          <div class="poke-unlock-info">🔒 ${xpNeeded} XP to unlock</div>
-          <div class="poke-mini-bar-track" style="--type-color:${poke.color}">
-            <div class="poke-mini-bar-fill" style="width:${progressPct}%"></div>
-          </div>
-        </div>
-      </div>`;
+      </div></div>`;
   }
 }
 
 function renderDayCards(){
-  const container=document.getElementById('dayCards');
-  container.innerHTML='';
+  const container=document.getElementById('dayCards');container.innerHTML='';
   const wData=db.weeks[weekKey];
   DAYS.forEach(day=>{
     const d=wData?.days[day];
@@ -740,18 +649,16 @@ function renderDayCards(){
     const checked=d?d.quests.filter(Boolean).length:0;
     const total=quests.length;
     const allDone=checked===total;
-    const isAct=day===activeDay;
-    const isSigned=d?.signedOff;
+    const isAct=day===activeDay,isSigned=d?.signedOff;
     const pct=total>0?Math.round(checked/total*100):0;
     let pctStr;
-    if(allDone&&d?.submitted) pctStr='⭐ Done';
-    else if(allDone) pctStr='✓ 100%';
+    if(allDone&&d?.submitted)pctStr='⭐ Done';
+    else if(allDone)pctStr='✓ 100%';
     else pctStr=pct+'%';
     const card=document.createElement('div');
     card.className=`day-card${isAct?' active':''}${allDone&&!isAct?' all-done':''}`;
     card.onclick=()=>setActiveDay(day);
-    card.innerHTML=`
-      ${isSigned?'<div class="signed-pip">✓</div>':''}
+    card.innerHTML=`${isSigned?'<div class="signed-pip">✓</div>':''}
       <div class="day-name">${day}</div>
       <div class="day-emoji-icon">${DAY_META[day].icon}</div>
       <div class="day-pct">${pctStr}</div>`;
@@ -760,31 +667,34 @@ function renderDayCards(){
 }
 
 function renderQuestSection(){
-  const meta=DAY_META[activeDay];
-  const d=dayData(weekKey,activeDay);
-  const quests=questsFor(activeDay);
-  const locked=!!d?.submitted;
+  const meta=DAY_META[activeDay],d=dayData(weekKey,activeDay);
+  const quests=questsFor(activeDay),locked=!!d?.submitted;
   document.getElementById('questDayIcon').textContent=meta.icon;
   document.getElementById('questDayTitle').textContent=meta.theme;
   document.getElementById('questDayDate').textContent=dayDateStr(activeDay);
-  const list=document.getElementById('questList');
-  list.innerHTML='';
+  const list=document.getElementById('questList');list.innerHTML='';
   quests.forEach((q,i)=>{
     const checked=d?.quests[i]||false;
     const item=document.createElement('div');
     item.className=`quest-item${checked?' checked':''}${locked?' locked':''}`;
-    if(!locked) item.onclick=()=>toggleQuest(i);
-    item.innerHTML=`
-      <div class="quest-check">${checked?'✓':''}</div>
-      <div class="quest-body">
-        <div class="quest-time">${q.time}</div>
-        <div class="quest-text">${q.text}</div>
-      </div>
+    if(!locked)item.onclick=()=>toggleQuest(i);
+    item.innerHTML=`<div class="quest-check">${checked?'✓':''}</div>
+      <div class="quest-body"><div class="quest-time">${q.time}</div><div class="quest-text">${q.text}</div></div>
       <div class="quest-xp">+${q.xp} XP</div>`;
     list.appendChild(item);
   });
-  const earned=dayXP(weekKey,activeDay);
-  const max=maxXpFor(activeDay);
+  // Show Guide bonus XP row if present
+  const bonus=d?.bonusXP||0;
+  if(bonus>0){
+    const bonusItem=document.createElement('div');
+    bonusItem.className='quest-item bonus-row locked';
+    const noteText=d.bonusNote?` — "${d.bonusNote}"`:'';
+    bonusItem.innerHTML=`<div class="quest-check">🌟</div>
+      <div class="quest-body"><div class="quest-time">Guide Bonus</div><div class="quest-text">Great behavior noticed by your Guide${noteText}</div></div>
+      <div class="quest-xp">+${bonus} XP</div>`;
+    list.appendChild(bonusItem);
+  }
+  const earned=dayXP(weekKey,activeDay),max=maxXpFor(activeDay)+bonus;
   document.getElementById('dayXpNum').textContent=earned;
   document.getElementById('dayMaxXp').textContent=max;
   const sa=document.getElementById('submitArea');
@@ -794,45 +704,66 @@ function renderQuestSection(){
     sa.innerHTML='<div class="submitted-badge">✅ Day submitted!</div>';
   } else {
     sa.innerHTML=`<button class="submit-btn${confirmStep?' confirming':''}" onclick="handleSubmit()">
-      ${confirmStep?'Confirm? Tap again ✅':'Submit my day ⚔️'}
-    </button>`;
+      ${confirmStep?'Confirm? Tap again ✅':'Submit my day ⚔️'}</button>`;
   }
   const perfect=d&&d.quests.every(Boolean)&&d.submitted;
   document.getElementById('perfectBanner').style.display=perfect?'block':'none';
 }
 
-function renderAll(){
-  renderHeader();
-  renderPokePanels();
-  renderDayCards();
-  renderQuestSection();
-}
+function renderAll(){renderHeader();renderPokePanels();renderDayCards();renderQuestSection();}
 
 // ════════════════════════════════════════════════════════════
 //  INTERACTIONS
 // ════════════════════════════════════════════════════════════
-function setActiveDay(day){ activeDay=day; confirmStep=false; renderAll(); }
-
+function setActiveDay(day){activeDay=day;confirmStep=false;renderAll();}
 function toggleQuest(idx){
-  const d=dayData(weekKey,activeDay);
-  if(!d||d.submitted) return;
-  d.quests[idx]=!d.quests[idx];
-  updateXP();
-  renderAll();
+  const d=dayData(weekKey,activeDay);if(!d||d.submitted)return;
+  d.quests[idx]=!d.quests[idx];updateXP();renderAll();
 }
-
 function handleSubmit(){
   if(!confirmStep){
-    confirmStep=true;
-    renderQuestSection();
-    setTimeout(()=>{ if(confirmStep){ confirmStep=false; renderQuestSection(); }},3000);
-    return;
+    confirmStep=true;renderQuestSection();
+    setTimeout(()=>{if(confirmStep){confirmStep=false;renderQuestSection();}},3000);return;
   }
   confirmStep=false;
-  const d=dayData(weekKey,activeDay);
-  if(!d||d.submitted) return;
-  d.submitted=true;
+  const d=dayData(weekKey,activeDay);if(!d||d.submitted)return;
+  d.submitted=true;updateXP();renderAll();
+}
+
+// ════════════════════════════════════════════════════════════
+//  GUIDE BONUS XP
+// ════════════════════════════════════════════════════════════
+function openBonusForm(wk,day){
+  activeBonusKey=`${wk}|${day}`;
+  renderGuideModal();
+  // Scroll to the form after render
+  setTimeout(()=>{
+    const el=document.getElementById(`bonusForm_${wk}_${day}`);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },50);
+}
+function closeBonusForm(){activeBonusKey=null;renderGuideModal();}
+
+function selectBonusPreset(wk,day,amt){
+  const inp=document.getElementById(`bonusAmt_${wk}_${day}`);
+  if(inp){inp.value=amt;}
+  // Highlight selected preset
+  document.querySelectorAll(`.bonus-preset[data-key="${wk}|${day}"]`).forEach(b=>{
+    b.classList.toggle('selected',parseInt(b.dataset.amt)===amt);
+  });
+}
+
+function confirmBonus(wk,day){
+  const amtInput=document.getElementById(`bonusAmt_${wk}_${day}`);
+  const noteInput=document.getElementById(`bonusNote_${wk}_${day}`);
+  const amt=Math.max(0,parseInt(amtInput?.value)||0);
+  const note=(noteInput?.value||'').trim();
+  const d=dayData(wk,day);if(!d)return;
+  d.bonusXP=amt;
+  d.bonusNote=note;
+  activeBonusKey=null;
   updateXP();
+  renderGuideModal();
   renderAll();
 }
 
@@ -840,35 +771,39 @@ function handleSubmit(){
 //  LEVEL-UP OVERLAY
 // ════════════════════════════════════════════════════════════
 function showLevelUpOverlay(newLvl){
-  const poke = POKEMON[Math.min(newLvl-1, POKEMON.length-1)];
-  document.getElementById('lvlupNewLevel').textContent = `${levelIcon(db.allTimeXP)} Lv. ${newLvl} — ${levelTitle(db.allTimeXP)}`;
-  document.getElementById('lvlupPokeImg').src  = pokeImg(poke.id);
-  document.getElementById('lvlupPokeImg').alt  = poke.name;
-  document.getElementById('lvlupPokeName').textContent = poke.name;
-  document.getElementById('lvlupPokeType').textContent = poke.type;
-  document.getElementById('lvlupPokeCard').style.setProperty('--reveal-color', poke.color);
-  spawnStars();
-  document.getElementById('lvlupOverlay').style.display='flex';
+  const poke=POKEMON[Math.min(newLvl-1,POKEMON.length-1)];
+  const isMilestone=MILESTONE_LEVELS.has(newLvl);
+  const overlay=document.getElementById('lvlupOverlay');
+  overlay.className='lvlup-overlay'+(isMilestone?' milestone':'');
+  document.getElementById('lvlupTitle').textContent=isMilestone?'🏆 MILESTONE!':'⬆️ LEVEL UP!';
+  document.getElementById('lvlupSubtitle').textContent=isMilestone?'An incredibly rare Pokémon appeared!':'You unlocked a new buddy!';
+  document.getElementById('lvlupNewLevel').textContent=`${levelIcon((newLvl-1)*XP_PER_LEVEL)} Lv. ${newLvl} — ${LEVEL_TITLES[newLvl-1]}`;
+  document.getElementById('lvlupPokeImg').src=pokeImg(poke.id);
+  document.getElementById('lvlupPokeImg').alt=poke.name;
+  document.getElementById('lvlupPokeName').textContent=poke.name;
+  document.getElementById('lvlupPokeType').textContent=poke.type;
+  document.getElementById('lvlupPokeCard').style.setProperty('--reveal-color',poke.color);
+  document.getElementById('lvlupUnlockedTag').textContent=isMilestone?'🏆 MILESTONE POKÉMON UNLOCKED!':'🎉 NEW POKÉMON UNLOCKED!';
+  spawnStars(isMilestone);
+  overlay.style.display='flex';
 }
-
 function closeLevelUp(){
-  db.pendingLevelUp=0;
-  saveDB();
+  db.pendingLevelUp=0;saveDB();
   document.getElementById('lvlupOverlay').style.display='none';
   document.getElementById('lvlupStars').innerHTML='';
 }
-
-function spawnStars(){
-  const container=document.getElementById('lvlupStars');
-  container.innerHTML='';
-  const emojis=['⭐','✨','🌟','💫','🎉'];
-  for(let i=0;i<28;i++){
+function spawnStars(milestone){
+  const container=document.getElementById('lvlupStars');container.innerHTML='';
+  const emojis=milestone
+    ?['⭐','✨','🌟','💫','🏆','👑','💎','🎊']
+    :['⭐','✨','🌟','💫','🎉'];
+  const count=milestone?40:28;
+  for(let i=0;i<count;i++){
     const el=document.createElement('span');
     el.className='star-particle';
     el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-    el.style.left=Math.random()*100+'%';
-    el.style.top='-30px';
-    el.style.fontSize=(14+Math.random()*14)+'px';
+    el.style.left=Math.random()*100+'%';el.style.top='-30px';
+    el.style.fontSize=(14+Math.random()*16)+'px';
     el.style.animationDuration=(1.8+Math.random()*2.4)+'s';
     el.style.animationDelay=(Math.random()*1.2)+'s';
     container.appendChild(el);
@@ -878,84 +813,109 @@ function spawnStars(){
 // ════════════════════════════════════════════════════════════
 //  PIN
 // ════════════════════════════════════════════════════════════
-function openPinModal(){
-  pinBuf=''; updatePinDots();
-  document.getElementById('pinError').textContent='';
-  document.getElementById('pinOverlay').style.display='flex';
-}
-function closePinModal(){ document.getElementById('pinOverlay').style.display='none'; pinBuf=''; }
-function pinPress(n){
-  if(pinBuf.length>=4) return;
-  pinBuf+=n; updatePinDots();
-  if(pinBuf.length===4) setTimeout(checkPin,200);
-}
-function pinBack(){ pinBuf=pinBuf.slice(0,-1); updatePinDots(); document.getElementById('pinError').textContent=''; }
-function updatePinDots(){ for(let i=0;i<4;i++) document.getElementById('pd'+i).classList.toggle('filled',i<pinBuf.length); }
+function openPinModal(){pinBuf='';updatePinDots();document.getElementById('pinError').textContent='';document.getElementById('pinOverlay').style.display='flex';}
+function closePinModal(){document.getElementById('pinOverlay').style.display='none';pinBuf='';}
+function pinPress(n){if(pinBuf.length>=4)return;pinBuf+=n;updatePinDots();if(pinBuf.length===4)setTimeout(checkPin,200);}
+function pinBack(){pinBuf=pinBuf.slice(0,-1);updatePinDots();document.getElementById('pinError').textContent='';}
+function updatePinDots(){for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinBuf.length);}
 function checkPin(){
-  if(pinBuf===GUIDE_PIN){ closePinModal(); openGuideModal(); }
-  else{ document.getElementById('pinError').textContent='❌ Wrong PIN — try again.'; pinBuf=''; updatePinDots(); }
+  if(pinBuf===GUIDE_PIN){closePinModal();openGuideModal();}
+  else{document.getElementById('pinError').textContent='❌ Wrong PIN — try again.';pinBuf='';updatePinDots();}
 }
 
 // ════════════════════════════════════════════════════════════
 //  GUIDE VIEW
 // ════════════════════════════════════════════════════════════
-function openGuideModal(){ renderGuideModal(); document.getElementById('guideOverlay').style.display='flex'; }
-function closeGuideModal(){ document.getElementById('guideOverlay').style.display='none'; }
+function openGuideModal(){renderGuideModal();document.getElementById('guideOverlay').style.display='flex';}
+function closeGuideModal(){document.getElementById('guideOverlay').style.display='none';activeBonusKey=null;}
 
 function renderGuideModal(){
   const body=document.getElementById('guideBody');
   const wkKeys=Object.keys(db.weeks).sort().reverse();
-  if(!wkKeys.length){
-    body.innerHTML='<p style="text-align:center;color:#a0aec0;padding:30px">No data yet.</p>'; return;
-  }
+  if(!wkKeys.length){body.innerHTML='<p style="text-align:center;color:#a0aec0;padding:30px">No data yet.</p>';return;}
   const lvl=levelNum(db.allTimeXP);
-  let html=`
-    <div class="guide-summary">
-      <div class="guide-summary-label">Lorenzo's All-Time Progress</div>
-      <div class="guide-summary-stats">
-        <div><div class="guide-stat-val">${db.allTimeXP.toLocaleString()} XP</div><div class="guide-stat-sub">Total earned</div></div>
-        <div><div class="guide-stat-val">${levelIcon(db.allTimeXP)} Lv. ${lvl}</div><div class="guide-stat-sub">${levelTitle(db.allTimeXP)}</div></div>
-        <div><div class="guide-stat-val">${countPerfect()} ⭐</div><div class="guide-stat-sub">Perfect days</div></div>
-        <div><div class="guide-stat-val">${currentPoke(db.allTimeXP).name}</div><div class="guide-stat-sub">Current buddy</div></div>
-      </div>
-    </div>`;
+  let html=`<div class="guide-summary">
+    <div class="guide-summary-label">Lorenzo's All-Time Progress</div>
+    <div class="guide-summary-stats">
+      <div><div class="guide-stat-val">${db.allTimeXP.toLocaleString()} XP</div><div class="guide-stat-sub">Total earned</div></div>
+      <div><div class="guide-stat-val">${levelIcon(db.allTimeXP)} Lv. ${lvl}</div><div class="guide-stat-sub">${levelTitle(db.allTimeXP)}</div></div>
+      <div><div class="guide-stat-val">${countPerfect()} ⭐</div><div class="guide-stat-sub">Perfect days</div></div>
+      <div><div class="guide-stat-val">${currentPoke(db.allTimeXP).name}</div><div class="guide-stat-sub">Current buddy</div></div>
+    </div></div>`;
+
   wkKeys.forEach(wk=>{
     const isCur=wk===weekKey;
     html+=`<div class="guide-week-block"><div class="guide-week-label">${isCur?'📍 Current — ':''}Week of ${weekRange(wk)}</div>`;
     DAYS.forEach(day=>{
-      const d=db.weeks[wk]?.days[day]; if(!d) return;
+      const d=db.weeks[wk]?.days[day];if(!d)return;
       const qs=questsFor(day);
       const chk=d.quests.filter(Boolean).length;
-      const xp=dayXP(wk,day); const mx=maxXpFor(day);
+      const qxp=questXP(wk,day),bonus=d.bonusXP||0,bonusNote=d.bonusNote||'';
+      const totalXp=qxp+bonus,mx=maxXpFor(day);
       const icon=DAY_META[day].icon;
-      let act;
-      if(d.signedOff) act=`<div class="guide-signed">✓ Signed off</div>`;
-      else if(d.submitted) act=`<button class="guide-signoff-btn" onclick="signOff('${wk}','${day}')">Sign off ✏️</button>`;
-      else act=`<div class="guide-not-sub">Not submitted</div>`;
+      let actionHTML;
+      if(d.signedOff) actionHTML=`<div class="guide-signed">✓ Signed off</div>`;
+      else if(d.submitted) actionHTML=`<button class="guide-signoff-btn" onclick="signOff('${wk}','${day}')">Sign off ✏️</button>`;
+      else actionHTML=`<div class="guide-not-sub">Not submitted</div>`;
+
+      // Bonus button/badge
+      const bonusKey=`${wk}|${day}`;
+      let bonusHTML;
+      if(bonus>0){
+        bonusHTML=`<button class="guide-bonus-badge" onclick="openBonusForm('${wk}','${day}')" title="Edit bonus XP">🌟 +${bonus} XP</button>`;
+      } else {
+        bonusHTML=`<button class="guide-bonus-btn" onclick="openBonusForm('${wk}','${day}')">🌟 Bonus</button>`;
+      }
+
       html+=`<div class="guide-day-row">
         <div class="guide-day-name">${icon} ${day}</div>
         <div class="guide-day-quests">${chk}/${qs.length} quests</div>
-        <div class="guide-day-xp">${xp}/${mx} XP</div>
-        ${act}
+        <div class="guide-day-xp">${totalXp}/${mx} XP</div>
+        ${actionHTML}
+        ${bonusHTML}
       </div>`;
+
+      // Bonus form panel (shown inline when active)
+      if(activeBonusKey===bonusKey){
+        const existingAmt=bonus||'';
+        const existingNote=bonusNote||'';
+        html+=`<div class="bonus-form-panel" id="bonusForm_${wk}_${day}">
+          <div class="bonus-form-title">🌟 Award Bonus XP — ${icon} ${day}</div>
+          <div class="bonus-presets">
+            ${[5,10,15,25,50].map(n=>`<button class="bonus-preset${existingAmt===n?' selected':''}" data-key="${bonusKey}" data-amt="${n}" onclick="selectBonusPreset('${wk}','${day}',${n})">${n>0?'+':''}${n}</button>`).join('')}
+          </div>
+          <div class="bonus-inputs">
+            <input id="bonusAmt_${wk}_${day}" class="bonus-amt-input" type="number" min="0" max="500" placeholder="XP" value="${existingAmt}">
+            <input id="bonusNote_${wk}_${day}" class="bonus-note-input" type="text" maxlength="80" placeholder="What did you notice? (optional)" value="${existingNote.replace(/"/g,'&quot;')}">
+          </div>
+          <div class="bonus-form-btns">
+            <button class="bonus-award-btn" onclick="confirmBonus('${wk}','${day}')">🌟 Award XP</button>
+            <button class="bonus-cancel-btn" onclick="closeBonusForm()">Cancel</button>
+            ${bonus>0?`<button class="bonus-cancel-btn" style="color:#e53e3e;border-color:#fed7d7" onclick="removeBonus('${wk}','${day}')">Remove</button>`:''}
+          </div>
+        </div>`;
+      }
     });
     html+='</div>';
   });
   body.innerHTML=html;
 }
 
-function signOff(wk,day){
-  const d=dayData(wk,day);
-  if(!d||!d.submitted) return;
-  d.signedOff=true; saveDB();
-  renderGuideModal(); renderDayCards();
+function removeBonus(wk,day){
+  const d=dayData(wk,day);if(!d)return;
+  d.bonusXP=0;d.bonusNote='';
+  activeBonusKey=null;
+  updateXP();renderGuideModal();renderAll();
 }
-
+function signOff(wk,day){
+  const d=dayData(wk,day);if(!d||!d.submitted)return;
+  d.signedOff=true;saveDB();renderGuideModal();renderDayCards();
+}
 function countPerfect(){
   let c=0;
-  for(const wk in db.weeks) DAYS.forEach(day=>{
+  for(const wk in db.weeks)DAYS.forEach(day=>{
     const d=db.weeks[wk]?.days[day];
-    if(d&&d.submitted&&d.quests.every(Boolean)) c++;
+    if(d&&d.submitted&&d.quests.every(Boolean))c++;
   });
   return c;
 }
@@ -973,10 +933,8 @@ function init(){
   saveDB();
   document.getElementById('weekLabel').textContent=`Week of ${weekRange(weekKey)}`;
   renderAll();
-  // Fire any pending level-up from previous session
   if(db.pendingLevelUp>0){
-    const lvl=db.pendingLevelUp;
-    db.pendingLevelUp=0; saveDB();
+    const lvl=db.pendingLevelUp;db.pendingLevelUp=0;saveDB();
     setTimeout(()=>showLevelUpOverlay(lvl),1000);
   }
 }
