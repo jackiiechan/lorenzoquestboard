@@ -214,6 +214,24 @@ body{
 }
 .bonus-cancel-btn:hover{border-color:#AFA9EC;color:#7F77DD;}
 
+/* ─── GUIDE QUEST OVERRIDE PANEL ─────────────────────────── */
+.guide-quest-btn{background:#f0f0ff;border:2px solid #AFA9EC;color:#7F77DD;border-radius:8px;padding:4px 10px;font-size:10px;font-weight:800;cursor:pointer;transition:all 0.18s;flex-shrink:0;}
+.guide-quest-btn:hover{background:#EEEDFE;border-color:#7F77DD;}
+.quest-review-panel{background:linear-gradient(135deg,#EEEDFE,#f5f4f0);border:2px solid #7F77DD;border-radius:12px;padding:12px 14px;margin-bottom:4px;}
+.quest-review-title{font-size:12px;font-weight:800;color:#3C3489;margin-bottom:8px;}
+.quest-review-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #d8d5f5;}
+.quest-review-item:last-of-type{border-bottom:none;}
+.quest-review-check{width:22px;height:22px;border-radius:6px;border:2px solid #AFA9EC;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;font-size:12px;font-weight:900;transition:all 0.15s;margin-top:1px;}
+.quest-review-check.checked{background:#7F77DD;border-color:#3C3489;color:white;}
+.quest-review-check:hover{border-color:#3C3489;}
+.quest-review-body{flex:1;min-width:0;}
+.quest-review-time{font-size:9px;font-weight:800;color:#7F77DD;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:2px;}
+.quest-review-text{font-size:11px;color:#2d3748;line-height:1.35;}
+.quest-review-xp{font-size:11px;font-weight:800;color:#3C3489;background:#EEEDFE;border-radius:6px;padding:2px 7px;flex-shrink:0;align-self:center;white-space:nowrap;}
+.quest-review-xp.deducted{color:#a0aec0;background:#f0f0f0;text-decoration:line-through;}
+.quest-review-done{background:linear-gradient(135deg,#7F77DD,#3C3489);color:white;border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:800;cursor:pointer;transition:all 0.18s;margin-top:10px;display:block;}
+.quest-review-done:hover{transform:scale(1.02);}
+
 /* ─── LEVEL-UP OVERLAY ────────────────────────────────────────── */
 .lvlup-overlay{
   position:fixed;inset:0;z-index:200;
@@ -389,7 +407,7 @@ body{
 
 const GUIDE_PIN    = '1234';      // ← change PIN here
 const DB_KEY       = 'lorenzoDB2';
-const XP_PER_LEVEL = 200;
+const XP_PER_LEVEL = 150;
 
 // ─── 20 LEVELS ─────────────────────────────────────────────
 // Milestone levels: 10 (Mythic Legend) and 20 (Pokémon Master)
@@ -498,6 +516,7 @@ let activeDay   = 'Mon';
 let pinBuf      = '';
 let confirmStep = false;
 let activeBonusKey = null;  // 'weekKey|day' when bonus form is open
+let activeQuestKey = null;  // 'weekKey|day' when quest override panel is open
 
 // ════════════════════════════════════════════════════════════
 //  DATABASE
@@ -559,7 +578,10 @@ function dayXP(wk,day){
 }
 function recomputeAllTimeXP(){
   let t=0;
-  for(const wk in db.weeks)DAYS.forEach(day=>{t+=dayXP(wk,day);});
+  for(const wk in db.weeks)DAYS.forEach(day=>{
+    const d=db.weeks[wk]?.days[day];
+    if(d&&d.submitted) t+=dayXP(wk,day);  // XP only counts on submitted days
+  });
   return t;
 }
 
@@ -718,7 +740,7 @@ function renderAll(){renderHeader();renderPokePanels();renderDayCards();renderQu
 function setActiveDay(day){activeDay=day;confirmStep=false;renderAll();}
 function toggleQuest(idx){
   const d=dayData(weekKey,activeDay);if(!d||d.submitted)return;
-  d.quests[idx]=!d.quests[idx];updateXP();renderAll();
+  d.quests[idx]=!d.quests[idx];saveDB();renderAll(); // XP tallies on Submit, not on click
 }
 function handleSubmit(){
   if(!confirmStep){
@@ -743,6 +765,23 @@ function openBonusForm(wk,day){
   },50);
 }
 function closeBonusForm(){activeBonusKey=null;renderGuideModal();}
+
+// ── Guide Quest Override ──────────────────────────────────
+function openQuestReview(wk,day){
+  activeQuestKey=`${wk}|${day}`;
+  activeBonusKey=null; // close bonus form if open
+  renderGuideModal();
+  setTimeout(()=>{
+    const el=document.getElementById(`questReview_${wk}_${day}`);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },50);
+}
+function closeQuestReview(){activeQuestKey=null;renderGuideModal();}
+function toggleGuideQuest(wk,day,idx){
+  const d=dayData(wk,day);if(!d)return;
+  d.quests[idx]=!d.quests[idx];
+  updateXP();renderGuideModal();renderAll();
+}
 
 function selectBonusPreset(wk,day,amt){
   const inp=document.getElementById(`bonusAmt_${wk}_${day}`);
@@ -827,7 +866,7 @@ function checkPin(){
 //  GUIDE VIEW
 // ════════════════════════════════════════════════════════════
 function openGuideModal(){renderGuideModal();document.getElementById('guideOverlay').style.display='flex';}
-function closeGuideModal(){document.getElementById('guideOverlay').style.display='none';activeBonusKey=null;}
+function closeGuideModal(){document.getElementById('guideOverlay').style.display='none';activeBonusKey=null;activeQuestKey=null;}
 
 function renderGuideModal(){
   const body=document.getElementById('guideBody');
@@ -867,13 +906,32 @@ function renderGuideModal(){
         bonusHTML=`<button class="guide-bonus-btn" onclick="openBonusForm('${wk}','${day}')">🌟 Bonus</button>`;
       }
 
+      const questBtnHTML=`<button class="guide-quest-btn" onclick="openQuestReview('${wk}','${day}')" title="Override quest checkboxes">✏️ Quests</button>`;
+
       html+=`<div class="guide-day-row">
         <div class="guide-day-name">${icon} ${day}</div>
         <div class="guide-day-quests">${chk}/${qs.length} quests</div>
         <div class="guide-day-xp">${totalXp}/${mx} XP</div>
         ${actionHTML}
         ${bonusHTML}
+        ${questBtnHTML}
       </div>`;
+
+      // Quest override panel (shown inline when active)
+      if(activeQuestKey===bonusKey){
+        html+=`<div class="quest-review-panel" id="questReview_${wk}_${day}">
+          <div class="quest-review-title">✏️ Override Quests — ${icon} ${day}</div>
+          ${qs.map((q,i)=>`<div class="quest-review-item">
+            <div class="quest-review-check ${d.quests[i]?'checked':''}" onclick="toggleGuideQuest('${wk}','${day}',${i})">${d.quests[i]?'✓':''}</div>
+            <div class="quest-review-body">
+              <div class="quest-review-time">${q.time}</div>
+              <div class="quest-review-text">${q.text}</div>
+            </div>
+            <div class="quest-review-xp${d.quests[i]?'':' deducted'}">+${q.xp} XP</div>
+          </div>`).join('')}
+          <button class="quest-review-done" onclick="closeQuestReview()">✓ Done reviewing</button>
+        </div>`;
+      }
 
       // Bonus form panel (shown inline when active)
       if(activeBonusKey===bonusKey){
