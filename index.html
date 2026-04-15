@@ -595,7 +595,7 @@ function getMonday(date){
   const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');
   return `${y}-${m}-${dd}`;
 }
-function todayDayName(){return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];}
+function todayDayName(){return['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];}
 function isWeekend(){const d=new Date().getDay();return d===0||d===6;}
 function weekRange(mondayKey){
   const mon=new Date(mondayKey+'T12:00:00');
@@ -666,10 +666,502 @@ function updateXP(){
 function renderHeader(){
   const xp=db.allTimeXP,lvl=levelNum(xp);
   const xpIn=xp%XP_PER_LEVEL,pct=Math.min((xpIn/XP_PER_LEVEL)*100,100);
-  const isMilestone=MBLESTONE_LEVELS.has(lvl);
+  const isMilestone=MILESTONE_LEVELS.has(lvl);
   document.getElementById('levelIcon').textContent=levelIcon(xp)+' ';
-  document.getE�V�V�D'��B�v�WfV��V�r��FW�D6��FV�C��b�G��f����F�7V�V�B�vWDV�V�V�D'��B�v�WfV�F�F�Rr��FW�D6��FV�C��WfV�F�F�R�����F�7V�V�B�vWDV�V�V�D'��B�wF�FŇ�V�r��FW�D6��FV�Cׇ�F���6�U7G&��r����F�7V�V�B�vWDV�V�V�D'��B�w�&$�&V�r��FW�D6��FV�C�G������G���U%��UdT���F��W�B�WfV���F�7V�V�B�vWDV�V�V�D'��B�w�&$f���r��7G��R�v�GF��7B�rRs��F�7V�V�B�vWDV�V�V�D'��B�v�WfV�&FvRr��6�74��S�v�WfV��&FvRr���4֖�W7F��S�r֖�W7F��R�&FvRs�rr���Р�gV�7F���&V�FW%��U�V�2����6��7B��F"���F��U���6��7B7W#�7W'&V�E��R�����C��W�E��R�����6��7B���ׇU��U%��UdT��7C��F��֖₇������U%��UdT�����F�7V�V�B�vWDV�V�V�D'��B�w��T6&D7W'&V�Br����W$�D���'V��E��T6&B�7W"�G'VR�����b��B���F�7V�V�B�vWDV�V�V�D'��B�w��T6&D�W�Br����W$�D���'V��E��T6&B��B�f�6R�7B����V�6R��F�7V�V�B�vWDV�V�V�D'��B�w��T6&D�W�Br����W$�D����F�b6�73�'��R����f�#�	���8�����5DU"�'#��7�7G��S�&f��B�6��S���f��B�vV�v�C�c�6���#�4C�ssc�F�7���&��6���&v���F��G�#�����:����V���6�VB��7����F�c���ЧР�gV�7F���'V��E��T6&B���R�V���6�VB�&�w&W757B���6��7B��s���T��r���R�B���6��7BW'$f��F��2�7G��R�F�7���v���Rs�F��2�&V�DV�V�V�B���W$�D�³�s�F�b7G��S���vf��B�6��S�S'��Ɩ�RֆV�v�C���s�	�����F�c�v��6��7B�4֖�W7F��S���R�֖�W7F��W��f�6S���b�V���6�VB���&WGW&��F�b6�73�'��R�6&BV���6�VBG��4֖�W7F��S�r֖�W7F��R�6&Bs�rw�"7G��S�"��G�R�6���#�G���R�6���'�#��F�b6�73�'��R�6&B�F�#��7�6�73�'��R��f��Fr#�G��UdT���4��5���R��WfV�����b�G���R��WfV����7���7�6�73�'��R�G�R�Fr#�G���R�G�W���7����F�c��F�b6�73�'��R֖�r�&V#�Ɩ�r6�73�'��R֖�r"7&3�"G���w�"�C�"G���R���W�"��F��s�&���"��W'&�#�"G�W'$f��#���F�c��F�b6�73�'��R�6&B�&�GF��#��F�b6�73�'��R���R�FW�B#�G���R���W���F�c��F�b6�73�'��R�V���6�֖�f�#�G��4֖�W7F��S�	��b֖�W7F��R'VFG�s�u��W"'VFG�	��w���F�c���F�c���F�c����V�6R��6��7B��VVFVCՅ�U%��UdT�҆F"���F��U�U��U%��UdT��6��7B��6��6��֗4֖�W7F��S�	��bs�	�I"s��&WGW&��F�b6�73�'��R�6&B"7G��S�"��G�R�6���#�G���R�6���'�#��F�b6�73�'��R�6&B�F�#��7�6�73�'��R��f��Fr"7G��S�&&6�w&�V�C�6V3#�G���6��6����b�G���R��WfV����7���7�6�73�'��R�G�R�Fr#������7����F�c��F�b6�73�'��R֖�r�&V#�Ɩ�r6�73�'��R֖�r6�Ɔ�VWGFR"7&3�"G���w�"�C�#���"��F��s�&���"��W'&�#�"G�W'$f��#���F�c��F�b6�73�'��R�6&B�&�GF��#��F�b6�73�'��R���R�FW�Bח7FW'�#������F�c��F�b6�73�'��R�V���6�֖�f�#�G��4֖�W7F��S�	��bԔ�U5D��R(	Bs�	�I"w�G���VVFVG��F�V���6���F�c��F�b6�73�'��R�֖��&"�G&6�"7G��S�"��G�R�6���#�G���R�6���'�#��F�b6�73�'��R�֖��&"�f���"7G��S�'v�GF��G�&�w&W757G�R#���F�c���F�c���F�c���F�c���ЧР�gV�7F���&V�FW$F�6&G2����6��7B6��F��W#�F�7V�V�B�vWDV�V�V�D'��B�vF�6&G2r��6��F��W"���W$�D���rs��6��7BtFF�F"�vVV�5�vVV��W�Ӱ�D�2�f�$V6��F��簢6��7BC�tFF��F�5�F�Ӱ�6��7BVW7G3�VW7G4f�"�F����6��7B6�V6�VC�C�B�VW7G2�f��FW"�&���V���V�wF����6��7BF�F��VW7G2��V�wF���6��7B��F��S�6�V6�VC���F�Fð�6��7B�47C�F����7F�fTF�Ɨ56�v�VC�C��6�v�VD�fc��6��7B7C�F�F����F��&�V�B�6�V6�VB�F�F£�����WB7E7G#���b���F��RbfC��7V&֗GFVB�7E7G#�~*�F��Rs��V�6R�b���F��R�7E7G#�~)�2Rs��V�6R7E7G#�7B�rRs��6��7B6&C�F�7V�V�B�7&VFTV�V�V�B�vF�br���6&B�6�74��S�F��6&BG��47C�r7F�fRs�rw�G���F��Rbb�47C�r���F��Rs�rw���6&B���6Ɩ6�҂���6WD7F�fTF��F����6&B���W$�D���G��56�v�VC�s�F�b6�73�'6�v�VB��#�)�3��F�c�s�rwТ�F�b6�73�&F����R#�G�F����F�c��F�b6�73�&F��V����֖6��#�G�D���UD�F���6�����F�c��F�b6�73�&F��7B#�G�7E7G'���F�c���6��F��W"�V�D6���B�6&B���ғ��Р�gV�7F���&V�FW%VW7E6V7F��ₗ��6��7B�WF�D���UD�7F�fTF���C�F�FF�vVV��W��7F�fTF����6��7BVW7G3�VW7G4f�"�7F�fTF�����6�VC�C��7V&֗GFVC��F�7V�V�B�vWDV�V�V�D'��B�wVW7DF��6��r��FW�D6��FV�C��WF�6�㰢F�7V�V�B�vWDV�V�V�D'��B�wVW7DF�F�F�Rr��FW�D6��FV�C��WF�F�V�S��F�7V�V�B�vWDV�V�V�D'��B�wVW7DF�FFRr��FW�D6��FV�C�F�FFU7G"�7F�fTF����6��7BƗ7C�F�7V�V�B�vWDV�V�V�D'��B�wVW7DƗ7Br��Ɨ7B���W$�D���rs��VW7G2�f�$V6���ƒ��簢6��7B6�V6�VC�C��VW7G5�����f�6S��6��7B�FV��F�7V�V�B�7&VFTV�V�V�B�vF�br����FV��6�74��S�VW7B֗FV�G�6�V6�VC�r6�V6�VBs�rw�G���6�VC�r��6�VBs�rw����b���6�VB��FV����6Ɩ6�҂���F�vv�UVW7B������FV����W$�D����F�b6�73�'VW7B�6�V6�#�G�6�V6�VC�~)�2s�rw���F�c��F�b6�73�'VW7B�&�G�#��F�b6�73�'VW7B�F��R#�G��F��W���F�c��F�b6�73�'VW7B�FW�B#�G��FW�G���F�c���F�c��F�b6�73�'VW7Bׇ#�G������F�c���Ɨ7B�V�D6���B��FVғ��ғ����6��rwV�FR&��W2�&�r�b&W6V�@�6��7B&��W3�C��&��W5������b�&��W3����6��7B&��W4�FV��F�7V�V�B�7&VFTV�V�V�B�vF�br���&��W4�FV��6�74��S�wVW7B֗FV�&��W2�&�r��6�VBs��6��7B��FUFW�C�B�&��W4��FS�(	B"G�B�&��W4��FW�&�rs��&��W4�FV����W$�D����F�b6�73�'VW7B�6�V6�#�	�����F�c��F�b6�73�'VW7B�&�G�#��F�b6�73�'VW7B�F��R#�wV�FR&��W3��F�c��F�b6�73�'VW7B�FW�B#�w&VB&V�f��"��F�6VB'���W"wV�FRG���FUFW�G���F�c���F�c��F�b6�73�'VW7Bׇ#�G�&��W7����F�c���Ɨ7B�V�D6���B�&��W4�FVғ��Т6��7BV&�VC�F���vVV��W��7F�fTF���������f�"�7F�fTF���&��W3��F�7V�V�B�vWDV�V�V�D'��B�vF���V�r��FW�D6��FV�C�V&�VC��F�7V�V�B�vWDV�V�V�D'��B�vF����r��FW�D6��FV�C�����6��7B6�F�7V�V�B�vWDV�V�V�D'��B�w7V&֗D&Vr����b��5vVV�V�B��bf7F�fTF����F�F�F���R�����6���W$�D���s�F�b6�73�'vVV�V�B���FR#�	�ɒ�E�w2F�RvVV�V�B(	B6VR��R���F���F�c�s���V�6R�b���6�VB���6���W$�D���s�F�b6�73�'7V&֗GFVB�&FvR#�)�RF�7V&֗GFVB��F�c�s���V�6R��6���W$�D����'WGF��6�73�'7V&֗B�'F�G�6��f�&�7FW�r6��f�&֖�rs�rw�"��6Ɩ6��&��F�U7V&֗B��#�G�6��f�&�7FW�t6��f�&��Fv��)�Rs�u7V&֗BגF�)�N���w���'WGF�����Т6��7BW&fV7C�BbfB�VW7G2�WfW'��&���V�bfB�7V&֗GFVC��F�7V�V�B�vWDV�V�V�D'��B�wW&fV7D&��W"r��7G��R�F�7���W&fV7C�v&��6�s�v���Rs��Р�gV�7F���&V�FW$���&V�FW$�VFW"���&V�FW%��U�V�2���&V�FW$F�6&G2���&V�FW%VW7E6V7F��ₓ�&V�FW%&WVW7E6V7F��ₓ�&V�FW$wV�FT&"���ЦgV�7F���&V�FW$wV�FT&"����6��7BV�F��s҆F"�&WVW7G7�ŵҒ�f��FW"�#��"�7FGW3���wV�F��rr���V�wF���6��7B'F��F�7V�V�B�vWDV�V�V�D'��B�vwV�FT&$'F�r���b�'F�&WGW&㰢'F����W$�D���	�I"wV�FRf�WrG�V�F��s���7�7G��S�&&6�w&�V�C�6SS6S6S�6���#�v��FS�&�&FW"�&F�W3�SS�v�GF��w���V�v�C�w��f��B�6��S����F�7�����Ɩ�R�f�W��Ɩv�֗FV�3�6V�FW#��W7F�g��6��FV�C�6V�FW#��&v����VgC�W��f��B�vV�v�C���fW'F�6��Ɩv�֖FF�R#�G�V�F��w���7���rw���Р���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �����DU$5D���0���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F���6WD7F�fTF��F���7F�fTF��F��6��f�&�7FW�f�6S�&V�FW$���ЦgV�7F���F�vv�UVW7B��G����6��7BC�F�FF�vVV��W��7F�fTF����b�G��B�7V&֗GFVB�&WGW&㰢B�VW7G5��G���B�VW7G5��G�ӷ6fTD"���&V�FW$������F�ƖW2��7V&֗B���B��6Ɩ6��ЦgV�7F�����F�U7V&֗B�����b�6��f�&�7FW���6��f�&�7FW�G'VS�&V�FW%VW7E6V7F��ₓ��6WEF��V�WB����綖b�6��f�&�7FW��6��f�&�7FW�f�6S�&V�FW%VW7E6V7F��ₓ����3��&WGW&㰢Т6��f�&�7FW�f�6S��6��7BC�F�FF�vVV��W��7F�fTF����b�G��B�7V&֗GFVB�&WGW&㰢B�7V&֗GFVC�G'VS�WFFU����&V�FW$����Р���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y ���5T4��$UTU5E0���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F���&V�FW%&WVW7E6V7F��ₗ��6��7B6V3�F�7V�V�B�vWDV�V�V�D'��B�w&WVW7E6V7F���r���b�6V2�&WGW&㰢6��7BV�F��s҆F"�&WVW7G7�ŵҒ�f��FW"�#��"�7FGW3���wV�F��rr���V�wF����WB�F����F�b6�73�'&WVW7BֆVFW"#��F�b6�73�'&WVW7BֆVFW"�F�F�R#�)Ȟ���ג&WVW7G0�G�V�F��s���7�6�73�'&WVW7B�V�F��r�&FvR#�G�V�F��w�V�F��s��7���rwТ��F�c��'WGF��6�73�'&WVW7B�FB�'F�"��6Ɩ6��'F�vv�U&WVW7Df�&҂�#�G�&WVW7Df�&��V��~)�R6�6V�s�r��Wr&WVW7Bw���'WGF�����F�c����b�&WVW7Df�&��V◰��F�³��F�b6�73�'&WVW7B�f�&���V�#��F�b6�73�'&WVW7B�f�&���&V�#�	�*�v�Bv�V�B��RƖ�S���F�c��FW�F&V6�73�'&WVW7B�FW�F&V"�C�'&WVW7EFW�B"�6V���FW#�$�v�V�BƖ�^(
-b#���FW�F&V��F�b6�73�'&WVW7B�V&���&V�#�v���V&��B'�(
-b��F�����F�c��FW�F&V6�73�'&WVW7B�FW�F&V"�C�'&WVW7DV&�'�"�6V���FW#�$�v��6��r��R�FW6W'fR�B'�(
-b"7G��S�&֖�ֆV�v�C�CG�#���FW�F&V��F�b6�73�'&WVW7B�f�&��'F�2#��'WGF��6�73�'&WVW7B�7V&֗B�'F�"��6Ɩ6��'7V&֗E&WVW7B��#�6V�B&WVW7B)Ȟ�����'WGF����'WGF��6�73�'&WVW7B�6�6V��'F�"��6Ɩ6��'F�vv�U&WVW7Df�&҂�#�6�6V���'WGF�����F�c���F�c���Т�b��F"�&WVW7G7�ŵҒ��V�wF������F�³�s�F�b6�73�'&WVW7B�Ɨ7B#�s������F"�&WVW7G5��&WfW'6R���f�$V6��#�簢6��7BFFS��WrFFR�"�7&VFVDB��F���6�TFFU7G&��r�vV��U2rǶ���F��w6��'Br�F��v�V�W&�2wғ��6��7B7FGW4�&V��"�7FGW3���wV�F��rs�~(�2V�F��rs�"�7FGW3���v&�fVBs�~)�R&�fVBs�~)����BF��2F��Rs���F�³��F�b6�73�'&WVW7B֗FV�G�"�7FGW7�#��F�b6�73�'&WVW7B֗FV��7FGW2G�"�7FGW7�#�G�7FGW4�&V����F�c��F�b6�73�'&WVW7B֗FV��FW�B#�G�"�FW�G���F�c�G�"�V&�'���F�b6�73�'&WVW7B֗FV��V&�'�#��7��v��V&��B'����7��G�"�V&�'����F�c��rwТG�"�wV�FT6���V�C��F�b6�73�'&WVW7B֗FV��6���V�BG�"�7FGW7�#�	�*�G�"�wV�FT6���V�G���F�c��rwТ�F�b6�73�'&WVW7B֗FV��FFR#�6V�BG�FFW���F�c���F�c���ғ���F�³�s��F�c�s��Т6V2���W$�D��ևF�ð�ЦgV�7F���F�vv�U&WVW7Df�&҂��&WVW7Df�&��V��&WVW7Df�&��V�&V�FW%&WVW7E6V7F��ₓ�ЦgV�7F���7V&֗E&WVW7B����6��7BFW�DV��F�7V�V�B�vWDV�V�V�D'��B�w&WVW7EFW�Br���6��7BFW�C҇FW�DV���f�VW��rr��G&�҂����b�FW�B�&WGW&㰢6��7BV&�'�҆F�7V�V�B�vWDV�V�V�D'��B�w&WVW7DV&�'�r���f�VW��rr��G&�҂����b�F"�&WVW7G2�F"�&WVW7G3յӰ�F"�&WVW7G2�W6����C�FFR���r���FW�B�V&�'��7FGW3�wV�F��rr�wV�FT6���V�C�rr�7&VFVDC�FFR���r��ғ��&WVW7Df�&��V��f�6S��6fTD"���&V�FW%&WVW7E6V7F��ₓ�&V�FW$wV�FT&"����ЦgV�7F���&�fU&WVW7B��B�6���V�B���6��7B&W҆F"�&WVW7G7�ŵҒ�f��B�#��"�C��֖B���b�&W�&WGW&㰢&W�7FGW3�v&�fVBs�&W�wV�FT6���V�C҆6���V�G��rr��G&�҂��&W�&W7��FVDC�FFR���r����6fTD"���&V�FW$wV�FT��F��&V�FW%&WVW7E6V7F��ₓ�&V�FW$wV�FT&"����ЦgV�7F���FV�&WVW7B��B�6���V�B���6��7B&W҆F"�&WVW7G7�ŵҒ�f��B�#��"�C��֖B���b�&W�&WGW&㰢&W�7FGW3�vFV�VBs�&W�wV�FT6���V�C҆6���V�G��rr��G&�҂��&W�&W7��FVDC�FFR���r����6fTD"���&V�FW$wV�FT��F��&V�FW%&WVW7E6V7F��ₓ�&V�FW$wV�FT&"����Р���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y ���uT�DR$��U2� ���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F����V�&��W4f�&҇v��F����7F�fT&��W4�W��G�v���G�F����&V�FW$wV�FT��F�����67&���F�F�Rf�&�gFW"&V�FW �6WEF��V�WB����簢6��7BV��F�7V�V�B�vWDV�V�V�D'��B�&��W4f�&��G�v���G�F������b�VV��67&��Ė�F�f�Wr��&V�f��#�w6���F�r�&��6��v�V&W7Bwғ����S���ЦgV�7F���6��6T&��W4f�&҂��7F�fT&��W4�W���V�÷&V�FW$wV�FT��F��Р���)H)HwV�FRVW7B�fW'&�FR)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F����V�VW7E&Wf�Wr�v��F����7F�fUVW7D�W��G�v���G�F����7F�fT&��W4�W���V�ò��6��6R&��W2f�&��b�V�&V�FW$wV�FT��F���6WEF��V�WB����簢6��7BV��F�7V�V�B�vWDV�V�V�D'��B�VW7E&Wf�Wu�G�v���G�F������b�VV��67&��Ė�F�f�Wr��&V�f��#�w6���F�r�&��6��v�V&W7Bwғ����S���ЦgV�7F���6��6UVW7E&Wf�Wr���7F�fUVW7D�W���V�÷&V�FW$wV�FT��F��ЦgV�7F���F�vv�TwV�FUVW7B�v��F�ƖG����6��7BC�F�FF�v��F����b�B�&WGW&㰢B�VW7G5��G���B�VW7G5��G�Ӱ�WFFU����&V�FW$wV�FT��F��&V�FW$����Р�gV�7F���6V�V7D&��W5&W6WB�v��F���B���6��7B���F�7V�V�B�vWDV�V�V�D'��B�&��W4�E�G�v���G�F������b��������f�VS��C�Т����v�Ɩv�B6V�V7FVB&W6W@�F�7V�V�B�VW'�6V�V7F�$��&��W2�&W6WE�FFֶW��"G�v���G�F��%���f�$V6��#�簢"�6�74Ɨ7B�F�vv�R�w6V�V7FVBr�'6T��B�"�FF6WB��B�����B���ғ��Р�gV�7F���6��f�&�&��W2�v��F����6��7B�D��WC�F�7V�V�B�vWDV�V�V�D'��B�&��W4�E�G�v���G�F�����6��7B��FT��WC�F�7V�V�B�vWDV�V�V�D'��B�&��W4��FU�G�v���G�F�����6��7B�C��F������'6T��B��D��WC��f�VR������6��7B��FS҆��FT��WC��f�VW��rr��G&�҂���6��7BC�F�FF�v��F����b�B�&WGW&㰢B�&��W5���C��B�&��W4��FS���FS��7F�fT&��W4�W���V�ð�WFFU�����&V�FW$wV�FT��F���&V�FW$����Р���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y ����UdT��U�dU$�����)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F���6��t�WfV�W�fW&����Wt�f��6��7B��S���T����F��֖��Wt�f�����T�����V�wF���Ӱ�6��7B�4֖�W7F��S�Ԕ�U5D��U��UdT�2�2��Wt�f��6��7B�fW&���F�7V�V�B�vWDV�V�V�D'��B�v�f�W�fW&��r����fW&���6�74��S�v�f�W��fW&��r���4֖�W7F��S�r֖�W7F��Rs�rr���F�7V�V�B�vWDV�V�V�D'��B�v�f�WF�F�Rr��FW�D6��FV�C֗4֖�W7F��S�	��bԔ�U5D��Rs�~*�n����UdT�Us��F�7V�V�B�vWDV�V�V�D'��B�v�f�W7V'F�F�Rr��FW�D6��FV�C֗4֖�W7F��S�t���7&VF�&ǒ&&R��:����V&VBs�u��RV���6�VB�Wr'VFG�s��F�7V�V�B�vWDV�V�V�D'��B�v�f�W�Wt�WfV�r��FW�D6��FV�C�G��WfVĖ6�₆�Wt�f������U%��UdT��b�G��Wt�f��(	BG��UdT��D�D�U5��Wt�f������F�7V�V�B�vWDV�V�V�D'��B�v�f�W��T��rr��7&3���T��r���R�B���F�7V�V�B�vWDV�V�V�D'��B�v�f�W��T��rr���C���R���S��F�7V�V�B�vWDV�V�V�D'��B�v�f�W��T��Rr��FW�D6��FV�C���R���S��F�7V�V�B�vWDV�V�V�D'��B�v�f�W��UG�Rr��FW�D6��FV�C���R�G�S��F�7V�V�B�vWDV�V�V�D'��B�v�f�W��T6&Br��7G��R�6WE&�W'G��r��&WfV��6���"r���R�6���"���F�7V�V�B�vWDV�V�V�D'��B�v�f�WV���6�VEFrr��FW�D6��FV�C֗4֖�W7F��S�	��bԔ�U5D��R��8����T���4�TBs�	���Ur��8����T���4�TBs��7v�7F'2��4֖�W7F��R����fW&���7G��R�F�7���vf�W�s��ЦgV�7F���6��6T�WfV�W����F"�V�F��t�WfV�W��6fTD"����F�7V�V�B�vWDV�V�V�D'��B�v�f�W�fW&��r��7G��R�F�7���v���Rs��F�7V�V�B�vWDV�V�V�D'��B�v�f�W7F'2r����W$�D���rs��ЦgV�7F���7v�7F'2�֖�W7F��R���6��7B6��F��W#�F�7V�V�B�vWDV�V�V�D'��B�v�f�W7F'2r��6��F��W"���W$�D���rs��6��7BV����3�֖�W7F��P���~*�r�~)ʂr�	���r�	�*�r�	��br�	�r�	�(�r�	��uТ��~*�r�~)ʂr�	���r�	�*�r�	��uӰ�6��7B6�V�C�֖�W7F��S�C�#���f�"��WB�����6�V�C�������6��7BV��F�7V�V�B�7&VFTV�V�V�B�w7�r���V��6�74��S�w7F"�'F�6�Rs��V��FW�D6��FV�C�V����5��F��f���"��F��&�F�҂��V����2��V�wF��Ӱ�V��7G��R��VgC��F��&�F�҂���rRs�V��7G��R�F��r�3�s��V��7G��R�f��E6��S҃B��F��&�F�҂��b��w�s��V��7G��R���F���GW&F���҃ゴ�F��&�F�҂��"�B��w2s��V��7G��R���F���FV��҄�F��&�F�҂���"��w2s��6��F��W"�V�D6���B�V��ЧР���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �������)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F����V�����F����'Vc�rs�WFFU��F�G2���F�7V�V�B�vWDV�V�V�D'��B�w��W'&�"r��FW�D6��FV�C�rs�F�7V�V�B�vWDV�V�V�D'��B�w���fW&��r��7G��R�F�7���vf�W�s�ЦgV�7F���6��6U����F��F�7V�V�B�vWDV�V�V�D'��B�w���fW&��r��7G��R�F�7���v���Rs���'Vc�rs�ЦgV�7F�����&W72�◶�b���'Vb��V�wF���B�&WGW&���'Vb���WFFU��F�G2����b���'Vb��V�wF����B�6WEF��V�WB�6�V6����#��ЦgV�7F�����&6������'Vc���'Vb�6Ɩ6R�����WFFU��F�G2���F�7V�V�B�vWDV�V�V�D'��B�w��W'&�"r��FW�D6��FV�C�rs�ЦgV�7F���WFFU��F�G2���f�"��WB�����C�����F�7V�V�B�vWDV�V�V�D'��B�wBr����6�74Ɨ7B�F�vv�R�vf���VBrƓ���'Vb��V�wF���ЦgV�7F���6�V6��ₗ���b���'Vc���uT�DU��◶6��6U����F���V�wV�FT��F��ТV�6W�F�7V�V�B�vWDV�V�V�D'��B�w��W'&�"r��FW�D6��FV�C�~)��w&��r��(	BG'�v���s���'Vc�rs�WFFU��F�G2���ЧР���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y ���uT�DRd�Up���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F����V�wV�FT��F��&V�FW$wV�FT��F��F�7V�V�B�vWDV�V�V�D'��B�vwV�FT�fW&��r��7G��R�F�7���vf�W�s�ЦgV�7F���6��6TwV�FT��F��F�7V�V�B�vWDV�V�V�D'��B�vwV�FT�fW&��r��7G��R�F�7���v���Rs�7F�fT&��W4�W���V�ö7F�fUVW7D�W���V�÷Р�gV�7F���&V�FW$wV�FT��F���6��7B&�G��F�7V�V�B�vWDV�V�V�D'��B�vwV�FT&�G�r���6��7Bv��W�3��&�V7B�W�2�F"�vVV�2��6�'B���&WfW'6R�����b�v��W�2��V�wF���&�G����W$�D���s�7G��S�'FW�B�Ɩv�6V�FW#�6���#�6V3�FF��s�3�#���FF�WB����s�&WGW&�Т6��7B�f���WfV��V҆F"���F��U�����WB�F����F�b6�73�&wV�FR�7V��'�#��F�b6�73�&wV�FR�7V��'���&V�#���&V��w2���F��R&�w&W73��F�c��F�b6�73�&wV�FR�7V��'��7FG2#��F�c��F�b6�73�&wV�FR�7FB�f�#�G�F"���F��U��F���6�U7G&��r������F�c��F�b6�73�&wV�FR�7FB�7V"#�F�F�V&�VC��F�c���F�c��F�c��F�b6�73�&wV�FR�7FB�f�#�G��WfVĖ6��F"���F��U����b�G��f����F�c��F�b6�73�&wV�FR�7FB�7V"#�G��WfV�F�F�R�F"���F��U�����F�c���F�c��F�c��F�b6�73�&wV�FR�7FB�f�#�G�6�V�EW&fV7B���*���F�c��F�b6�73�&wV�FR�7FB�7V"#�W&fV7BF�3��F�c���F�c��F�c��F�b6�73�&wV�FR�7FB�f�#�G�7W'&V�E��R�F"���F��U�����W���F�c��F�b6�73�&wV�FR�7FB�7V"#�7W'&V�B'VFG���F�c���F�c���F�c���F�c������)H)H&WVW7G26V7F���)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �6��7B��&W3�F"�&WVW7G7�ŵӰ�6��7BV�F��u&W3���&W2�f��FW"�#��"�7FGW3���wV�F��rr���6��7B&W6��fVE&W3���&W2�f��FW"�#��"�7FGW2��wV�F��rr����b���&W2��V�wF������F�³��F�b6�73�&wV�FR�&WVW7G2�&��6�#��F�b6�73�&wV�FR�&WVW7G2��&V�#�)Ȟ�����&V��w2&WVW7G0�G�V�F��u&W2��V�wF����7�6�73�&wV�FR�&W��Wr�&FvR#�G�V�F��u&W2��V�wF���Ws��7���rwТ��F�c���V�F��u&W2�f�$V6��#�簢6��7BFFS��WrFFR�"�7&VFVDB��F���6�TFFU7G&��r�vV��U2rǶ���F��w6��'Br�F��v�V�W&�2wғ���F�³��F�b6�73�&wV�FR�&W�V�F��r#��F�b6�73�&wV�FR�&W�FW�B#�	�9�G�"�FW�G���F�c�G�"�V&�'���F�b6�73�&wV�FR�&W�V&�'�#�$�v��V&��B'��G�"�V&�'��#��F�c��s�F�b7G��S�&�&v���&�GF�ӣ��#���F�c�wТƖ�WB6�73�&wV�FR�&W�6���V�B֖�WB"�C�'&W6���V�E�G�"�G�"G�S�'FW�B"�6V���FW#�$FB6���V�Bf�"��&V����F���(
-b#��F�b6�73�&wV�FR�&W�'F�2#��'WGF��6�73�&wV�FR�&�fR�'F�"��6Ɩ6��&&�fU&WVW7B�G�"�G��F�7V�V�B�vWDV�V�V�D'��B�w&W6���V�E�G�"�G�r���f�VR�#�)�R&�fS��'WGF����'WGF��6�73�&wV�FR�FV��'F�"��6Ɩ6��&FV�&WVW7B�G�"�G��F�7V�V�B�vWDV�V�V�D'��B�w&W6���V�E�G�"�G�r���f�VR�#�)��FV���'WGF�����F�c���F�c���ғ���b�&W6��fVE&W2��V�wF���������&W6��fVE&W5��&WfW'6R���f�$V6��#�簢6��7BFFS��WrFFR�"�&W7��FVDG��"�7&VFVDB��F���6�TFFU7G&��r�vV��U2rǶ���F��w6��'Br�F��v�V�W&�2wғ���F�³��F�b6�73�&wV�FR�&W�&W6��fVB#��F�b6�73�&wV�FR�&W�&W6��fVBֆVFW"#��7�6�73�&wV�FR�&W�&W6��fVB��G�"�7FGW7�#�G�"�7FGW3���v&�fVBs�~)�R&�fVBs�~)��FV�VBw�+rG�FFW���7����F�c��F�b6�73�&wV�FR�&W�&W6��fVB�FW�B#�G�"�FW�G���F�c�G�"�wV�FT6���V�C��F�b6�73�&wV�FR�&W�&W6��fVB�6���V�B#�	�*�"G�"�wV�FT6���V�G�#��F�c��rwТ��F�c���ғ��Т�F�³�s��F�c�s��Р�v��W�2�f�$V6��v��簢6��7B�47W#�v����vVV��W����F�³��F�b6�73�&wV�FR�vVV��&��6�#��F�b6�73�&wV�FR�vVV���&V�#�G��47W#�	�8�7W'&V�B(	Bs�rw�vVV��bG�vVV�&�vR�v�����F�c���D�2�f�$V6��F��簢6��7BC�F"�vVV�5�v����F�5�F�Ӷ�b�B�&WGW&㰢6��7B3�VW7G4f�"�F����6��7B6���B�VW7G2�f��FW"�&���V���V�wF���6��7B��VW7E��v��F���&��W3�B�&��W5����&��W4��FS�B�&��W4��FW��rs��6��7BF�FŇ���&��W2�׃����f�"�F����6��7B�6���D���UD�F���6�㰢�WB7F���D�ð��b�B�6�v�VD�fb�7F���D����F�b6�73�&wV�FR�6�v�VB#�)�26�v�VB�fc��F�c���V�6R�b�B�7V&֗GFVB�7F���D����'WGF��6�73�&wV�FR�6�v��fb�'F�"��6Ɩ6��'6�v��fb�rG�v��r�rG�F��r�#�6�v��fb)�������'WGF�����V�6R7F���D����F�b6�73�&wV�FR���B�7V"#���B7V&֗GFVC��F�c������&��W2'WGF���&FvP�6��7B&��W4�W��G�v���G�F�����WB&��W4�D�ð��b�&��W3����&��W4�D����'WGF��6�73�&wV�FR�&��W2�&FvR"��6Ɩ6��&�V�&��W4f�&҂rG�v��r�rG�F��r�"F�F�S�$VF�B&��W2�#�	����G�&��W7����'WGF������V�6R��&��W4�D����'WGF��6�73�&wV�FR�&��W2�'F�"��6Ɩ6��&�V�&��W4f�&҂rG�v��r�rG�F��r�#�	���&��W3��'WGF�����Р�6��7BVW7D'F�D����'WGF��6�73�&wV�FR�VW7B�'F�"��6Ɩ6��&�V�VW7E&Wf�Wr�rG�v��r�rG�F��r�"F�F�S�$�fW'&�FRVW7B6�V6�&��W2#�)�����VW7G3��'WGF�������F�³��F�b6�73�&wV�FR�F��&�r#��F�b6�73�&wV�FR�F����R#�G��6���G�F����F�c��F�b6�73�&wV�FR�F��VW7G2#�G�6����G�2��V�wF��VW7G3��F�c��F�b6�73�&wV�FR�F�ׇ#�G�F�FŇ��G�ׇ����F�c�G�7F���D��ТG�&��W4�D��ТG�VW7D'F�D��Т��F�c������VW7B�fW'&�FR�V��6��v���Ɩ�Rv�V�7F�fR���b�7F�fUVW7D�W����&��W4�W�����F�³��F�b6�73�'VW7B�&Wf�Wr��V�"�C�'VW7E&Wf�Wu�G�v���G�F��#��F�b6�73�'VW7B�&Wf�Wr�F�F�R#�)������fW'&�FRVW7G2(	BG��6���G�F����F�c�G�2����ƒ����F�b6�73�'VW7B�&Wf�Wr֗FV�#��F�b6�73�'VW7B�&Wf�Wr�6�V6�G�B�VW7G5����v6�V6�VBs�rw�"��6Ɩ6��'F�vv�TwV�FUVW7B�rG�v��r�rG�F��r�G��Ғ#�G�B�VW7G5����~)�2s�rw���F�c��F�b6�73�'VW7B�&Wf�Wr�&�G�#��F�b6�73�'VW7B�&Wf�Wr�F��R#�G��F��W���F�c��F�b6�73�'VW7B�&Wf�Wr�FW�B#�G��FW�G���F�c���F�c��F�b6�73�'VW7B�&Wf�WrׇG�B�VW7G5����rs�rFVGV7FVBw�#�G������F�c���F�c������rr�Т�'WGF��6�73�'VW7B�&Wf�Wr�F��R"��6Ɩ6��&6��6UVW7E&Wf�Wr��#�)�2F��R&Wf�Wv��s��'WGF�����F�c���Р���&��W2f�&��V��6��v���Ɩ�Rv�V�7F�fR���b�7F�fT&��W4�W����&��W4�W����6��7BW��7F��t�C�&��W7��rs��6��7BW��7F��t��FS�&��W4��FW��rs���F�³��F�b6�73�&&��W2�f�&���V�"�C�&&��W4f�&��G�v���G�F��#��F�b6�73�&&��W2�f�&��F�F�R#�	���v&B&��W2�(	BG��6���G�F����F�c��F�b6�73�&&��W2�&W6WG2#�G��R��R�#R�S��������'WGF��6�73�&&��W2�&W6WBG�W��7F��t�C�����r6V�V7FVBs�rw�"FFֶW��"G�&��W4�W��"FF��C�"G���"��6Ɩ6��'6V�V7D&��W5&W6WB�rG�v��r�rG�F��r�G��Ғ#�G����r�s�rw�G�����'WGF��������rr�Т��F�c��F�b6�73�&&��W2֖�WG2#�Ɩ�WB�C�&&��W4�E�G�v���G�F��"6�73�&&��W2��B֖�WB"G�S�&�V�&W""֖��#"���#S"�6V���FW#�%�"f�VS�"G�W��7F��t�G�#�Ɩ�WB�C�&&��W4��FU�G�v���G�F��"6�73�&&��W2���FR֖�WB"G�S�'FW�B"���V�wF��#�"�6V���FW#�%v�BF�B��R��F�6S���F���"f�VS�"G�W��7F��t��FR�&W�6R��"�r�rgV�C�r��#���F�c��F�b6�73�&&��W2�f�&��'F�2#��'WGF��6�73�&&��W2�v&B�'F�"��6Ɩ6��&6��f�&�&��W2�rG�v��r�rG�F��r�#�	���v&B���'WGF����'WGF��6�73�&&��W2�6�6V��'F�"��6Ɩ6��&6��6T&��W4f�&҂�#�6�6V���'WGF���G�&��W3���'WGF��6�73�&&��W2�6�6V��'F�"7G��S�&6���#�6SS6S6S�&�&FW"�6���#�6fVCvCr"��6Ɩ6��'&V��fT&��W2�rG�v��r�rG�F��r�#�&V��fS��'WGF����rwТ��F�c���F�c���Тғ���F�³�s��F�c�s��ғ��&�G����W$�D��ևF�ð�Р�gV�7F���&V��fT&��W2�v��F����6��7BC�F�FF�v��F����b�B�&WGW&㰢B�&��W5���B�&��W4��FS�rs��7F�fT&��W4�W���V�ð�WFFU����&V�FW$wV�FT��F��&V�FW$����ЦgV�7F���6�v��fb�v��F����6��7BC�F�FF�v��F����b�G��B�7V&֗GFVB�&WGW&㰢B�6�v�VD�fc�G'VS�6fTD"���&V�FW$wV�FT��F��&V�FW$F�6&G2����ЦgV�7F���6�V�EW&fV7B�����WB3���f�"�6��7Bv���F"�vVV�2�D�2�f�$V6��F��簢6��7BC�F"�vVV�5�v����F�5�F�Ӱ��b�BbfB�7V&֗GFVBbfB�VW7G2�WfW'��&���V⒖2����ғ��&WGW&�3��Р���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �����@���)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y)Y �gV�7F�����B������DD"����vVV��W��vWD���F���WrFFR�������EvVV��vVV��W����6��7BF�F��F�F�F���R����7F�fTF��D�2��6�VFW2�F�F���F�F��t���s��F"���F��U��&V6��WFT��F��U�����6fTD"����F�7V�V�B�vWDV�V�V�D'��B�wvVV��&V�r��FW�D6��FV�C�vVV��bG�vVV�&�vR�vVV��W�����&V�FW$�����b�F"�V�F��t�WfV�W����6��7B�f��F"�V�F��t�WfV�W�F"�V�F��t�WfV�W��6fTD"����6WEF��V�WB�����6��t�WfV�W�fW&����f����ЧР���B������67&�C���&�G�����F���
+  document.getElementById('levelNum').textContent=`Lv. ${lvl}`;
+  document.getElementById('levelTitle').textContent=levelTitle(xp);
+  document.getElementById('totalXpNum').textContent=xp.toLocaleString();
+  document.getElementById('xpBarLabel').textContent=`${xpIn} / ${XP_PER_LEVEL} XP to next level`;
+  document.getElementById('xpBarFill').style.width=pct+'%';
+  document.getElementById('levelBadge').className='level-badge'+(isMilestone?' milestone-badge':'');
+}
+
+function renderPokePanels(){
+  const xp=db.allTimeXP;
+  const cur=currentPoke(xp),nxt=nextPoke(xp);
+  const xpIn=xp%XP_PER_LEVEL,pct=Math.min((xpIn/XP_PER_LEVEL)*100,100);
+  document.getElementById('pokeCardCurrent').innerHTML=buildPokeCard(cur,true,0);
+  if(nxt){
+    document.getElementById('pokeCardNext').innerHTML=buildPokeCard(nxt,false,pct);
+  } else {
+    document.getElementById('pokeCardNext').innerHTML=`<div class="poke-maxlvl">👑 POKÉMON MASTER!<br><span style="font-size:11px;font-weight:600;color:#D97706;display:block;margin-top:4px">All Pokémon unlocked!</span></div>`;
+  }
+}
+
+function buildPokeCard(poke,unlocked,progressPct){
+  const img=pokeImg(poke.id);
+  const errFn=`this.style.display='none';this.parentElement.innerHTML+='<div style=\\'font-size:52px;line-height:1\\'>🎮</div>'`;
+  const isMilestone=poke.milestone||false;
+  if(unlocked){
+    return `<div class="poke-card unlocked${isMilestone?' milestone-card':''}" style="--type-color:${poke.color}">
+      <div class="poke-card-top">
+        <span class="poke-lvl-tag">${LEVEL_ICONS[poke.level-1]} Lv.${poke.level}</span>
+        <span class="poke-type-tag">${poke.type}</span>
+      </div>
+      <div class="poke-img-area"><img class="poke-img" src="${img}" alt="${poke.name}" loading="lazy" onerror="${errFn}"></div>
+      <div class="poke-card-bottom">
+        <div class="poke-name-text">${poke.name}</div>
+        <div class="poke-unlock-info">${isMilestone?'🏆 Milestone buddy!':'Your buddy! 🎉'}</div>
+      </div></div>`;
+  } else {
+    const xpNeeded=XP_PER_LEVEL-(db.allTimeXP%XP_PER_LEVEL);
+    const lockIcon=isMilestone?'🏆':'🔒';
+    return `<div class="poke-card" style="--type-color:${poke.color}">
+      <div class="poke-card-top">
+        <span class="poke-lvl-tag" style="background:#a0aec0">${lockIcon} Lv.${poke.level}</span>
+        <span class="poke-type-tag">???</span>
+      </div>
+      <div class="poke-img-area"><img class="poke-img silhouette" src="${img}" alt="???" loading="lazy" onerror="${errFn}"></div>
+      <div class="poke-card-bottom">
+        <div class="poke-name-text mystery">? ? ?</div>
+        <div class="poke-unlock-info">${isMilestone?'🏆 MILESTONE — ':'🔒 '}${xpNeeded} XP to unlock</div>
+        <div class="poke-mini-bar-track" style="--type-color:${poke.color}">
+          <div class="poke-mini-bar-fill" style="width:${progressPct}%"></div>
+        </div>
+      </div></div>`;
+  }
+}
+
+function renderDayCards(){
+  const container=document.getElementById('dayCards');container.innerHTML='';
+  const wData=db.weeks[weekKey];
+  DAYS.forEach(day=>{
+    const d=wData?.days[day];
+    const quests=questsFor(day);
+    const checked=d?d.quests.filter(Boolean).length:0;
+    const total=quests.length;
+    const allDone=checked===total;
+    const isAct=day===activeDay,isSigned=d?.signedOff;
+    const pct=total>0?Math.round(checked/total*100):0;
+    let pctStr;
+    if(allDone&&d?.submitted)pctStr='⭐ Done';
+    else if(allDone)pctStr='✓ 100%';
+    else pctStr=pct+'%';
+    const card=document.createElement('div');
+    card.className=`day-card${isAct?' active':''}${allDone&&!isAct?' all-done':''}`;
+    card.onclick=()=>setActiveDay(day);
+    card.innerHTML=`${isSigned?'<div class="signed-pip">✓</div>':''}
+      <div class="day-name">${day}</div>
+      <div class="day-emoji-icon">${DAY_META[day].icon}</div>
+      <div class="day-pct">${pctStr}</div>`;
+    container.appendChild(card);
+  });
+}
+
+function renderQuestSection(){
+  const meta=DAY_META[activeDay],d=dayData(weekKey,activeDay);
+  const quests=questsFor(activeDay),locked=!!d?.submitted;
+  document.getElementById('questDayIcon').textContent=meta.icon;
+  document.getElementById('questDayTitle').textContent=meta.theme;
+  document.getElementById('questDayDate').textContent=dayDateStr(activeDay);
+  const list=document.getElementById('questList');list.innerHTML='';
+  quests.forEach((q,i)=>{
+    const checked=d?.quests[i]||false;
+    const item=document.createElement('div');
+    item.className=`quest-item${checked?' checked':''}${locked?' locked':''}`;
+    if(!locked)item.onclick=()=>toggleQuest(i);
+    item.innerHTML=`<div class="quest-check">${checked?'✓':''}</div>
+      <div class="quest-body"><div class="quest-time">${q.time}</div><div class="quest-text">${q.text}</div></div>
+      <div class="quest-xp">+${q.xp} XP</div>`;
+    list.appendChild(item);
+  });
+  // Show Guide bonus XP row if present
+  const bonus=d?.bonusXP||0;
+  if(bonus>0){
+    const bonusItem=document.createElement('div');
+    bonusItem.className='quest-item bonus-row locked';
+    const noteText=d.bonusNote?` — "${d.bonusNote}"`:'';
+    bonusItem.innerHTML=`<div class="quest-check">🌟</div>
+      <div class="quest-body"><div class="quest-time">Guide Bonus</div><div class="quest-text">Great behavior noticed by your Guide${noteText}</div></div>
+      <div class="quest-xp">+${bonus} XP</div>`;
+    list.appendChild(bonusItem);
+  }
+  const earned=dayXP(weekKey,activeDay),max=maxXpFor(activeDay)+bonus;
+  document.getElementById('dayXpNum').textContent=earned;
+  document.getElementById('dayMaxXp').textContent=max;
+  const sa=document.getElementById('submitArea');
+  if(isWeekend()&&activeDay===todayDayName()){
+    sa.innerHTML='<div class="weekend-note">🌙 It\'s the weekend — see you Monday!</div>';
+  } else if(locked){
+    sa.innerHTML='<div class="submitted-badge">✅ Day submitted!</div>';
+  } else {
+    sa.innerHTML=`<button class="submit-btn${confirmStep?' confirming':''}" onclick="handleSubmit()">
+      ${confirmStep?'Confirm? Tap again ✅':'Submit my day ⚔️'}</button>`;
+  }
+  const perfect=d&&d.quests.every(Boolean)&&d.submitted;
+  document.getElementById('perfectBanner').style.display=perfect?'block':'none';
+}
+
+function renderAll(){renderHeader();renderPokePanels();renderDayCards();renderQuestSection();renderRequestSection();renderGuideBar();}
+function renderGuideBar(){
+  const pending=(db.requests||[]).filter(r=>r.status==='pending').length;
+  const btn=document.getElementById('guideBarBtn');if(!btn)return;
+  btn.innerHTML=`🔒 Guide View${pending>0?` <span style="background:#e53e3e;color:white;border-radius:50%;width:17px;height:17px;font-size:9px;display:inline-flex;align-items:center;justify-content:center;margin-left:5px;font-weight:900;vertical-align:middle">${pending}</span>`:''}`;
+}
+
+// ════════════════════════════════════════════════════════════
+//  INTERACTIONS
+// ════════════════════════════════════════════════════════════
+function setActiveDay(day){activeDay=day;confirmStep=false;renderAll();}
+function toggleQuest(idx){
+  const d=dayData(weekKey,activeDay);if(!d||d.submitted)return;
+  d.quests[idx]=!d.quests[idx];saveDB();renderAll(); // XP tallies on Submit, not on click
+}
+function handleSubmit(){
+  if(!confirmStep){
+    confirmStep=true;renderQuestSection();
+    setTimeout(()=>{if(confirmStep){confirmStep=false;renderQuestSection();}},3000);return;
+  }
+  confirmStep=false;
+  const d=dayData(weekKey,activeDay);if(!d||d.submitted)return;
+  d.submitted=true;updateXP();renderAll();
+}
+
+// ════════════════════════════════════════════════════════════
+//  SPECIAL REQUESTS
+// ════════════════════════════════════════════════════════════
+function renderRequestSection(){
+  const sec=document.getElementById('requestSection');if(!sec)return;
+  const pending=(db.requests||[]).filter(r=>r.status==='pending').length;
+  let html=`<div class="request-header">
+    <div class="request-header-title">✉️ My Requests
+      ${pending>0?`<span class="request-pending-badge">${pending} pending</span>`:''}
+    </div>
+    <button class="request-add-btn" onclick="toggleRequestForm()">${requestFormOpen?'✕ Cancel':'+ New Request'}</button>
+  </div>`;
+  if(requestFormOpen){
+    html+=`<div class="request-form-panel">
+      <div class="request-form-label">💬 What would you like?</div>
+      <textarea class="request-textarea" id="requestText" placeholder="I would like…"></textarea>
+      <div class="request-earn-label">I will earn it by… (optional)</div>
+      <textarea class="request-textarea" id="requestEarnBy" placeholder="I'll show you I deserve it by…" style="min-height:44px"></textarea>
+      <div class="request-form-btns">
+        <button class="request-submit-btn" onclick="submitRequest()">Send Request ✉️</button>
+        <button class="request-cancel-btn" onclick="toggleRequestForm()">Cancel</button>
+      </div>
+    </div>`;
+  }
+  if((db.requests||[]).length>0){
+    html+='<div class="request-list">';
+    [...db.requests].reverse().forEach(r=>{
+      const date=new Date(r.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      const statusLabel=r.status==='pending'?'⏳ Pending':r.status==='approved'?'✅ Approved':'❌ Not this time';
+      html+=`<div class="request-item ${r.status}">
+        <div class="request-item-status ${r.status}">${statusLabel}</div>
+        <div class="request-item-text">${r.text}</div>
+        ${r.earnBy?`<div class="request-item-earnby"><span>I'll earn it by:</span> ${r.earnBy}</div>`:''}
+        ${r.guideComment?`<div class="request-item-comment ${r.status}">💬 ${r.guideComment}</div>`:''}
+        <div class="request-item-date">Sent ${date}</div>
+      </div>`;
+    });
+    html+='</div>';
+  }
+  sec.innerHTML=html;
+}
+function toggleRequestForm(){requestFormOpen=!requestFormOpen;renderRequestSection();}
+function submitRequest(){
+  const textEl=document.getElementById('requestText');
+  const text=(textEl?.value||'').trim();
+  if(!text)return;
+  const earnBy=(document.getElementById('requestEarnBy')?.value||'').trim();
+  if(!db.requests)db.requests=[];
+  db.requests.push({id:Date.now(),text,earnBy,status:'pending',guideComment:'',createdAt:Date.now()});
+  requestFormOpen=false;
+  saveDB();renderRequestSection();renderGuideBar();
+}
+function approveRequest(id,comment){
+  const req=(db.requests||[]).find(r=>r.id===id);if(!req)return;
+  req.status='approved';req.guideComment=(comment||'').trim();req.respondedAt=Date.now();
+  saveDB();renderGuideModal();renderRequestSection();renderGuideBar();
+}
+function denyRequest(id,comment){
+  const req=(db.requests||[]).find(r=>r.id===id);if(!req)return;
+  req.status='denied';req.guideComment=(comment||'').trim();req.respondedAt=Date.now();
+  saveDB();renderGuideModal();renderRequestSection();renderGuideBar();
+}
+
+// ════════════════════════════════════════════════════════════
+//  GUIDE BONUS XP
+// ════════════════════════════════════════════════════════════
+function openBonusForm(wk,day){
+  activeBonusKey=`${wk}|${day}`;
+  renderGuideModal();
+  // Scroll to the form after render
+  setTimeout(()=>{
+    const el=document.getElementById(`bonusForm_${wk}_${day}`);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },50);
+}
+function closeBonusForm(){activeBonusKey=null;renderGuideModal();}
+
+// ── Guide Quest Override ──────────────────────────────────
+function openQuestReview(wk,day){
+  activeQuestKey=`${wk}|${day}`;
+  activeBonusKey=null; // close bonus form if open
+  renderGuideModal();
+  setTimeout(()=>{
+    const el=document.getElementById(`questReview_${wk}_${day}`);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },50);
+}
+function closeQuestReview(){activeQuestKey=null;renderGuideModal();}
+function toggleGuideQuest(wk,day,idx){
+  const d=dayData(wk,day);if(!d)return;
+  d.quests[idx]=!d.quests[idx];
+  updateXP();renderGuideModal();renderAll();
+}
+
+function selectBonusPreset(wk,day,amt){
+  const inp=document.getElementById(`bonusAmt_${wk}_${day}`);
+  if(inp){inp.value=amt;}
+  // Highlight selected preset
+  document.querySelectorAll(`.bonus-preset[data-key="${wk}|${day}"]`).forEach(b=>{
+    b.classList.toggle('selected',parseInt(b.dataset.amt)===amt);
+  });
+}
+
+function confirmBonus(wk,day){
+  const amtInput=document.getElementById(`bonusAmt_${wk}_${day}`);
+  const noteInput=document.getElementById(`bonusNote_${wk}_${day}`);
+  const amt=Math.max(0,parseInt(amtInput?.value)||0);
+  const note=(noteInput?.value||'').trim();
+  const d=dayData(wk,day);if(!d)return;
+  d.bonusXP=amt;
+  d.bonusNote=note;
+  activeBonusKey=null;
+  updateXP();
+  renderGuideModal();
+  renderAll();
+}
+
+// ════════════════════════════════════════════════════════════
+//  LEVEL-UP OVERLAY
+// ════════════════════════════════════════════════════════════
+function showLevelUpOverlay(newLvl){
+  const poke=POKEMON[Math.min(newLvl-1,POKEMON.length-1)];
+  const isMilestone=MILESTONE_LEVELS.has(newLvl);
+  const overlay=document.getElementById('lvlupOverlay');
+  overlay.className='lvlup-overlay'+(isMilestone?' milestone':'');
+  document.getElementById('lvlupTitle').textContent=isMilestone?'🏆 MILESTONE!':'⬆️ LEVEL UP!';
+  document.getElementById('lvlupSubtitle').textContent=isMilestone?'An incredibly rare Pokémon appeared!':'You unlocked a new buddy!';
+  document.getElementById('lvlupNewLevel').textContent=`${levelIcon((newLvl-1)*XP_PER_LEVEL)} Lv. ${newLvl} — ${LEVEL_TITLES[newLvl-1]}`;
+  document.getElementById('lvlupPokeImg').src=pokeImg(poke.id);
+  document.getElementById('lvlupPokeImg').alt=poke.name;
+  document.getElementById('lvlupPokeName').textContent=poke.name;
+  document.getElementById('lvlupPokeType').textContent=poke.type;
+  document.getElementById('lvlupPokeCard').style.setProperty('--reveal-color',poke.color);
+  document.getElementById('lvlupUnlockedTag').textContent=isMilestone?'🏆 MILESTONE POKÉMON UNLOCKED!':'🎉 NEW POKÉMON UNLOCKED!';
+  spawnStars(isMilestone);
+  overlay.style.display='flex';
+}
+function closeLevelUp(){
+  db.pendingLevelUp=0;saveDB();
+  document.getElementById('lvlupOverlay').style.display='none';
+  document.getElementById('lvlupStars').innerHTML='';
+}
+function spawnStars(milestone){
+  const container=document.getElementById('lvlupStars');container.innerHTML='';
+  const emojis=milestone
+    ?['⭐','✨','🌟','💫','🏆','👑','💎','🎊']
+    :['⭐','✨','🌟','💫','🎉'];
+  const count=milestone?40:28;
+  for(let i=0;i<count;i++){
+    const el=document.createElement('span');
+    el.className='star-particle';
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left=Math.random()*100+'%';el.style.top='-30px';
+    el.style.fontSize=(14+Math.random()*16)+'px';
+    el.style.animationDuration=(1.8+Math.random()*2.4)+'s';
+    el.style.animationDelay=(Math.random()*1.2)+'s';
+    container.appendChild(el);
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  PIN
+// ════════════════════════════════════════════════════════════
+function openPinModal(){pinBuf='';updatePinDots();document.getElementById('pinError').textContent='';document.getElementById('pinOverlay').style.display='flex';}
+function closePinModal(){document.getElementById('pinOverlay').style.display='none';pinBuf='';}
+function pinPress(n){if(pinBuf.length>=4)return;pinBuf+=n;updatePinDots();if(pinBuf.length===4)setTimeout(checkPin,200);}
+function pinBack(){pinBuf=pinBuf.slice(0,-1);updatePinDots();document.getElementById('pinError').textContent='';}
+function updatePinDots(){for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinBuf.length);}
+function checkPin(){
+  if(pinBuf===GUIDE_PIN){closePinModal();openGuideModal();}
+  else{document.getElementById('pinError').textContent='❌ Wrong PIN — try again.';pinBuf='';updatePinDots();}
+}
+
+// ════════════════════════════════════════════════════════════
+//  GUIDE VIEW
+// ════════════════════════════════════════════════════════════
+function openGuideModal(){renderGuideModal();document.getElementById('guideOverlay').style.display='flex';}
+function closeGuideModal(){document.getElementById('guideOverlay').style.display='none';activeBonusKey=null;activeQuestKey=null;}
+
+function renderGuideModal(){
+  const body=document.getElementById('guideBody');
+  const wkKeys=Object.keys(db.weeks).sort().reverse();
+  if(!wkKeys.length){body.innerHTML='<p style="text-align:center;color:#a0aec0;padding:30px">No data yet.</p>';return;}
+  const lvl=levelNum(db.allTimeXP);
+  let html=`<div class="guide-summary">
+    <div class="guide-summary-label">Lorenzo's All-Time Progress</div>
+    <div class="guide-summary-stats">
+      <div><div class="guide-stat-val">${db.allTimeXP.toLocaleString()} XP</div><div class="guide-stat-sub">Total earned</div></div>
+      <div><div class="guide-stat-val">${levelIcon(db.allTimeXP)} Lv. ${lvl}</div><div class="guide-stat-sub">${levelTitle(db.allTimeXP)}</div></div>
+      <div><div class="guide-stat-val">${countPerfect()} ⭐</div><div class="guide-stat-sub">Perfect days</div></div>
+      <div><div class="guide-stat-val">${currentPoke(db.allTimeXP).name}</div><div class="guide-stat-sub">Current buddy</div></div>
+    </div></div>`;
+
+  // ── Requests section ──────────────────────────────────────
+  const allReqs=db.requests||[];
+  const pendingReqs=allReqs.filter(r=>r.status==='pending');
+  const resolvedReqs=allReqs.filter(r=>r.status!=='pending');
+  if(allReqs.length>0){
+    html+=`<div class="guide-requests-block">
+      <div class="guide-requests-label">✉️ Lorenzo's Requests
+        ${pendingReqs.length>0?`<span class="guide-req-new-badge">${pendingReqs.length} new</span>`:''}
+      </div>`;
+    pendingReqs.forEach(r=>{
+      const date=new Date(r.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      html+=`<div class="guide-req-pending">
+        <div class="guide-req-text">📝 ${r.text}</div>
+        ${r.earnBy?`<div class="guide-req-earnby">"I'll earn it by: ${r.earnBy}"</div>`:'<div style="margin-bottom:8px"></div>'}
+        <input class="guide-req-comment-input" id="reqComment_${r.id}" type="text" placeholder="Add a comment for Lorenzo (optional)…">
+        <div class="guide-req-btns">
+          <button class="guide-approve-btn" onclick="approveRequest(${r.id},document.getElementById('reqComment_${r.id}')?.value)">✅ Approve</button>
+          <button class="guide-deny-btn" onclick="denyRequest(${r.id},document.getElementById('reqComment_${r.id}')?.value)">❌ Deny</button>
+        </div>
+      </div>`;
+    });
+    if(resolvedReqs.length>0){
+      [...resolvedReqs].reverse().forEach(r=>{
+        const date=new Date(r.respondedAt||r.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        html+=`<div class="guide-req-resolved">
+          <div class="guide-req-resolved-header">
+            <span class="guide-req-resolved-pip ${r.status}">${r.status==='approved'?'✅ Approved':'❌ Denied'} · ${date}</span>
+          </div>
+          <div class="guide-req-resolved-text">${r.text}</div>
+          ${r.guideComment?`<div class="guide-req-resolved-comment">💬 "${r.guideComment}"</div>`:''}
+        </div>`;
+      });
+    }
+    html+='</div>';
+  }
+
+  wkKeys.forEach(wk=>{
+    const isCur=wk===weekKey;
+    html+=`<div class="guide-week-block"><div class="guide-week-label">${isCur?'📍 Current — ':''}Week of ${weekRange(wk)}</div>`;
+    DAYS.forEach(day=>{
+      const d=db.weeks[wk]?.days[day];if(!d)return;
+      const qs=questsFor(day);
+      const chk=d.quests.filter(Boolean).length;
+      const qxp=questXP(wk,day),bonus=d.bonusXP||0,bonusNote=d.bonusNote||'';
+      const totalXp=qxp+bonus,mx=maxXpFor(day);
+      const icon=DAY_META[day].icon;
+      let actionHTML;
+      if(d.signedOff) actionHTML=`<div class="guide-signed">✓ Signed off</div>`;
+      else if(d.submitted) actionHTML=`<button class="guide-signoff-btn" onclick="signOff('${wk}','${day}')">Sign off ✏️</button>`;
+      else actionHTML=`<div class="guide-not-sub">Not submitted</div>`;
+
+      // Bonus button/badge
+      const bonusKey=`${wk}|${day}`;
+      let bonusHTML;
+      if(bonus>0){
+        bonusHTML=`<button class="guide-bonus-badge" onclick="openBonusForm('${wk}','${day}')" title="Edit bonus XP">🌟 +${bonus} XP</button>`;
+      } else {
+        bonusHTML=`<button class="guide-bonus-btn" onclick="openBonusForm('${wk}','${day}')">🌟 Bonus</button>`;
+      }
+
+      const questBtnHTML=`<button class="guide-quest-btn" onclick="openQuestReview('${wk}','${day}')" title="Override quest checkboxes">✏️ Quests</button>`;
+
+      html+=`<div class="guide-day-row">
+        <div class="guide-day-name">${icon} ${day}</div>
+        <div class="guide-day-quests">${chk}/${qs.length} quests</div>
+        <div class="guide-day-xp">${totalXp}/${mx} XP</div>
+        ${actionHTML}
+        ${bonusHTML}
+        ${questBtnHTML}
+      </div>`;
+
+      // Quest override panel (shown inline when active)
+      if(activeQuestKey===bonusKey){
+        html+=`<div class="quest-review-panel" id="questReview_${wk}_${day}">
+          <div class="quest-review-title">✏️ Override Quests — ${icon} ${day}</div>
+          ${qs.map((q,i)=>`<div class="quest-review-item">
+            <div class="quest-review-check ${d.quests[i]?'checked':''}" onclick="toggleGuideQuest('${wk}','${day}',${i})">${d.quests[i]?'✓':''}</div>
+            <div class="quest-review-body">
+              <div class="quest-review-time">${q.time}</div>
+              <div class="quest-review-text">${q.text}</div>
+            </div>
+            <div class="quest-review-xp${d.quests[i]?'':' deducted'}">+${q.xp} XP</div>
+          </div>`).join('')}
+          <button class="quest-review-done" onclick="closeQuestReview()">✓ Done reviewing</button>
+        </div>`;
+      }
+
+      // Bonus form panel (shown inline when active)
+      if(activeBonusKey===bonusKey){
+        const existingAmt=bonus||'';
+        const existingNote=bonusNote||'';
+        html+=`<div class="bonus-form-panel" id="bonusForm_${wk}_${day}">
+          <div class="bonus-form-title">🌟 Award Bonus XP — ${icon} ${day}</div>
+          <div class="bonus-presets">
+            ${[5,10,15,25,50].map(n=>`<button class="bonus-preset${existingAmt===n?' selected':''}" data-key="${bonusKey}" data-amt="${n}" onclick="selectBonusPreset('${wk}','${day}',${n})">${n>0?'+':''}${n}</button>`).join('')}
+          </div>
+          <div class="bonus-inputs">
+            <input id="bonusAmt_${wk}_${day}" class="bonus-amt-input" type="number" min="0" max="500" placeholder="XP" value="${existingAmt}">
+            <input id="bonusNote_${wk}_${day}" class="bonus-note-input" type="text" maxlength="80" placeholder="What did you notice? (optional)" value="${existingNote.replace(/"/g,'&quot;')}">
+          </div>
+          <div class="bonus-form-btns">
+            <button class="bonus-award-btn" onclick="confirmBonus('${wk}','${day}')">🌟 Award XP</button>
+            <button class="bonus-cancel-btn" onclick="closeBonusForm()">Cancel</button>
+            ${bonus>0?`<button class="bonus-cancel-btn" style="color:#e53e3e;border-color:#fed7d7" onclick="removeBonus('${wk}','${day}')">Remove</button>`:''}
+          </div>
+        </div>`;
+      }
+    });
+    html+='</div>';
+  });
+  body.innerHTML=html;
+}
+
+function removeBonus(wk,day){
+  const d=dayData(wk,day);if(!d)return;
+  d.bonusXP=0;d.bonusNote='';
+  activeBonusKey=null;
+  updateXP();renderGuideModal();renderAll();
+}
+function signOff(wk,day){
+  const d=dayData(wk,day);if(!d||!d.submitted)return;
+  d.signedOff=true;saveDB();renderGuideModal();renderDayCards();
+}
+function countPerfect(){
+  let c=0;
+  for(const wk in db.weeks)DAYS.forEach(day=>{
+    const d=db.weeks[wk]?.days[day];
+    if(d&&d.submitted&&d.quests.every(Boolean))c++;
+  });
+  return c;
+}
+
+// ════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════
+function init(){
+  loadDB();
+  weekKey=getMonday(new Date());
+  initWeek(weekKey);
+  const today=todayDayName();
+  activeDay=DAYS.includes(today)?today:'Mon';
+  db.allTimeXP=recomputeAllTimeXP();
+  saveDB();
+  document.getElementById('weekLabel').textContent=`Week of ${weekRange(weekKey)}`;
+  renderAll();
+  if(db.pendingLevelUp>0){
+    const lvl=db.pendingLevelUp;db.pendingLevelUp=0;saveDB();
+    setTimeout(()=>showLevelUpOverlay(lvl),1000);
+  }
+}
+
+init();
+</script>
+</body>
+</html>
